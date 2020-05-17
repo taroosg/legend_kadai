@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/css/line-awesome.min.css">
+    <link href="https://fonts.googleapis.com/earlyaccess/nicomoji.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script defer src=https://cdn.JsDelivr.net/npm/p5></script>
+    <script defer src=https://cdn.JsDelivr.net/npm/p5/lib/addons/p5.dom.min.js></script>
+    <script defer src=https://cdn.JsDelivr.net/npm/p5/lib/addons/p5.sound.min.js></script>
+
+    <script defer src="animation.js"></script>
+    <script defer src=sketch.js></script>
+   
+    
+</head>
+<body>
+    <div class="gui">
+        <h1 class="wf-nicomoji">じゃんけんサンプラー</h1>
+        <div class="fadeIn-out buruburu"><i id="thumbs_up" class="la la-thumbs-up"></i></div>
+        <div class="contents">
+            <div id="pc">相手の手</div>
+            <div id="result">結果</div>
+                <ul class="my-btn-list">
+                    <li><i id="par" class="la la-hand-paper"></i></li>
+                    <li><i id="gu"  class="la la-hand-rock"></i></li>
+                    <li><i id="cho" class="la la-hand-scissors"></i></li>
+                </ul>
+        </div>
+    </div>
+    
+    <script>
+
+        // 変数とか関数の準備-----------------------------------------
+        
+        let btnPress = false;
+        let gu = false;
+        let cho = false;
+        let par = false;
+        let count = 0; //試合回数カウント、キープレス時
+        let result = ""; //試合結果、音とアニメーションの分岐で使う
+        let resultAll;
+        let pcSelect = 0; // gu:0  cho:1  par:2
+
+        //勝ちカウント
+        let guWin = 0; 
+        let choWin = 0;
+        let parWin = 0;
+        let win = 0;
+        let lose = 0;
+        // let even = 0;
+        const special = 4; //スペシャルを出す勝利回数
+
+        // pcの手
+        const min = 0; 
+        const max = 2; // ぐーチョキぱーの３種
+        let pcNum = function(){
+          return Math.floor(Math.random() * (max - min + 1) + min);
+          // 0:gu  1:cho  2:par
+        }
+
+        // 試合判定をして結果を返す
+        let judgement = function(_mySelect){
+
+            //自分が押したキーの情報取得
+            let mySelect = _mySelect; 
+
+            //乱数で相手の手を決める
+            
+            // let pcSelect = pcNum(); // 0:gu  1:cho  2:par
+            console.log(mySelect, pcSelect);
+            
+            //勝ち負け判定 記録して勝ち負けの値を返す
+            if(mySelect === 0){               // ぐーのとき
+                if(pcSelect === 0){
+                    return "even";
+                }else if(pcSelect === 1){
+                    guWin++;
+                    win++;
+                    //console.log('ぐー勝ち: ' + guWin);
+                    return "win";
+                }else{
+                    lose++;
+                    return "lose";
+                }
+            } else if(mySelect === 1){        // ちょきのとき
+                if(pcSelect === 0){
+                    lose++;
+                    return "lose";
+                }else if(pcSelect === 1){
+                    return "even";
+                }else{
+                    choWin++;
+                    win++;
+                    //console.log('ちょき勝ち: ' + choWin);
+                    return "win";
+                    
+                }
+            } else if(mySelect === 2){        // ぱーのとき
+                if(pcSelect === 0){
+                    parWin++;
+                    win++;
+                    //console.log('ぱー勝ち: ' + parWin);
+                    return "win";           
+                }else if(pcSelect === 1){
+                    lose++;
+                    return "lose";
+                }else{
+                    return "even";
+                }
+            }
+        }
+
+        // 全試合の結果判定
+        let judgeAll = function(){
+            if(count === 4){
+                if(win === 4){
+                    return "awesome";
+                }else if(lose === 4){
+                    return "bad";
+                }else{
+                    return "good";
+                }
+            } else{
+                return null;
+            }
+        }
+
+        // 試合回数と勝ち負けカウントの初期化
+        let resetCount = function(){
+            if(count === 4){
+                count = 0;
+                win = 0;
+                lose = 0;
+            }
+        }
+
+        // pcの手の乱数を文字列に変換する
+        let transelatePcSelect = function(pcSelect){
+            a = pcSelect
+            if(a === 0){
+                return "✊";
+            }else if(a === 1){
+                return "✌️";
+            }else{
+                return "🖐";
+            }
+                
+        }
+
+        //ここまで------------//
+
+
+
+        // p5.js -------------------------------------------------------
+
+        var sample = []; // 音源ファイル 
+        var loseSample = [];
+        var evenSample = [];
+        var specialSample = [];
+        var kickSample = []; 
+        var hhtSample = []; 
+        var snareSample = []; 
+        var clapSample = []; 
+        var fxSample = [];
+        var bgmSample = [];
+        var animation; // animationインスタンス
+
+        let bgcs = [230,150,175,200,225,255]; // 背景色
+
+
+        // 音源データの読み込み-----------------------------
+
+        function preload(){
+
+            loseSample[0] = loadSound('assets/miss.wav');
+            loseSample[1] = loadSound('assets/lose1.wav');
+
+            evenSample[0] = loadSound('assets/even.wav');
+
+            specialSample[0] = loadSound('assets/thumbsUp.wav');
+            specialSample[1] = loadSound('assets/Awesome.wav');
+
+
+
+            kickSample[0] = loadSound('assets/kick.wav');
+            kickSample[1] = loadSound('assets/kick2.wav');
+            kickSample[2] = loadSound('assets/snare.wav');
+            kickSample[3] = loadSound('assets/clap.wav');
+
+            hhtSample[0] = loadSound('assets/hht_close.wav');
+            hhtSample[1] = loadSound('assets/hht_close2.wav');
+            hhtSample[2] = loadSound('assets/hht_close3.wav');
+            // hhtSample[3] = loadSound('assets/clap.wav');
+
+            // snareSample[0] = loadSound('assets/kick.wav');
+            // snareSample[1] = loadSound('assets/kick2.wav');
+            // snareSample[2] = loadSound('assets/snare.wav');
+            // snareSample[3] = loadSound('assets/clap.wav');
+
+            clapSample[0] = loadSound('assets/clap.wav');
+            // clapSample[1] = loadSound('assets/kick2.wav');
+            // clapSample[2] = loadSound('assets/snare.wav');
+            // clapSample[3] = loadSound('assets/clap.wav');
+
+            bgmSample[0] = loadSound('assets/loop.wav');
+        }
+
+        function setup(){
+            createCanvas(windowWidth, windowHeight);
+            bgc = bgcs[0]; //背景初期化
+            pcSelect = pcNum();
+            nextPcHand(pcSelect);
+            count = 0;
+        }
+
+
+
+        // 判定処理、アニメーション処理など -------------------------
+        function draw(){
+            
+            background(0, 127, 255);
+
+            // ボタンアニメーション-------------------
+            // キーがプレスされたときに条件式内がtrue
+            // キーが離されたら false になる
+            $(function(){
+                if(gu){
+                    $('#gu').css('font-size','130px');
+                } else {
+                    $('#gu').css('font-size','100px');
+                }
+
+                if(cho){
+                    $('#cho').css('font-size','130px');
+                }else{
+                    $('#cho').css('font-size','100px');
+                }
+                if(par){
+                    $('#par').css('font-size','130px');
+                }else{
+                    $('#par').css('font-size','100px');
+                }
+            });
+
+            // 画面のアニメーション -----------------------------------
+            // animation にインスタンスが代入されたらtrueになる？
+            if(animation){        
+                //console.log('animok');                      
+                animation.draw(); 
+            }
+            
+            resetCount(); // count が４になったらリセット
+
+        }
+
+
+        //  キーをプレスしたときの処理 ------------------------------
+        
+        function keyPressed(){
+            
+            // グーの処理
+            if(key==' '){
+                count++; // じゃんけんの試合数カウント
+                console.log('試合回数：' + count);
+                
+                gu = true;
+                
+                result = judgement(0);  // 勝敗結果を返す
+                resultAll = judgeAll(); // 4試合の結果を返す       
+                console.log(result, resultAll);
+                // 0:gu  1:cho  2:par
+                // win lose even の文字列がresultに返される
+                // 以下 result の結果によって条件分岐
+                playKeyAudio(result, 0);
+                playFxAudio(resultAll, resultAll);
+                drawAnimation(result, 0, resultAll);
+                showResult(result, resultAll); // 勝ったときのテキストとマーク表示
+            }
+            
+            // ちょきの処理
+            if(key=='l'){
+                count++; 
+                console.log('試合回数：' + count);
+
+                cho = true;
+                result = judgement(1);
+                resultAll = judgeAll();
+                playKeyAudio(result, 1);  // 1: cho
+                playFxAudio(resultAll);
+                drawAnimation(result, 1,resultAll);
+                showResult(result, resultAll); 
+                bgc = bgcs[2];
+                btnPress = true;  
+                //console.log(btnPress);
+            }
+
+            // パーの処理
+            if(key=='d'){
+                count++;
+                console.log('試合回数：' + count);
+                par = true;
+                btnPress = true;  
+                bgc = bgcs[3];
+                result = judgement(2);
+                resultAll = judgeAll();
+                playKeyAudio(result, 2);  // 2: par
+                playFxAudio(resultAll);
+                drawAnimation(result, 2, resultAll);
+                showResult(result, resultAll); 
+                //console.log('par:' + par + ', btnPress:' + btnPress);
+            }
+
+            // ????
+            if(key=='k'){
+                bgc = bgcs[4];
+                btnPress = true;  
+                console.log(btnPress);
+            }
+
+        }
+
+        
+        // 押したキーを離したら------------------------------
+
+        function keyReleased(){
+
+            if(key ==' '){
+                btnPress = false;
+                gu = false;
+                // 4回勝ったらリセット勝ちカウントリセット
+                if(guWin === special){ 
+                    guWin = 0;
+                }
+                pcSelect = pcNum();    //pcSelect更新
+                nextPcHand(pcSelect);  //pcの次の手をテキスト表示
+                //console.log('次の手: ' + pcSelect);
+            }
+
+            if(key=='l'){
+                btnPress = false;
+                cho = false;
+                if(choWin === special){ 
+                    choWin = 0;
+                }
+                pcSelect = pcNum();    //pcSelect更新
+                nextPcHand(pcSelect);  //pcの次の手をテキスト表示
+               // console.log('次の手: ' + pcSelect);
+            }
+
+            if(key=='d'){
+                btnPress = false;
+                par = false;
+                if(parWin === special){ 
+                    parWin = 0;
+                }
+                pcSelect = pcNum();    //pcSelect更新
+                nextPcHand(pcSelect);  //pcの次の手をテキスト表示
+               // console.log('次の手: ' + pcSelect);
+            }
+
+        }
+
+
+        // 音を鳴らす---------------------------------------------
+
+        function playKeyAudio(result, mySelect){
+            _result = result;
+            _mySelect = mySelect;
+            //console.log(_result);
+
+            // ぐーのとき  --------------------
+            if(_mySelect === 0){
+                console.log('4試合結果：' + judgeAll());
+                if(_result === "win"){
+                    // // 4回勝ったとき           <----  gu cho par の勝利数で個別の処理をしたいとき
+                    // if(win === special){ 
+                    //     specialSample[0].play();
+                    // }
+                    kickSample[0].play();
+                }else if(_result === "lose"){
+                    //lose音は４回目のときだけ鳴らさない
+                    if(count !== 4){
+                        loseSample[0].play();
+                        kickSample[0].play();
+                    }
+                }else if(_result === "even"){
+                    evenSample[0].play();
+                    kickSample[0].play();
+                }else{
+                    alert('error');
+                } 
+
+            }
+
+            // ちょきのとき  -------------------
+            if(_mySelect === 1){
+                console.log('4試合結果：' + judgeAll());
+                if(_result === "win"){
+                    hhtSample[2].play();
+                }else if(_result === "lose"){
+                    if(count !== 4){
+                        loseSample[0].play();
+                    }
+                }else if(_result === "even"){
+                    evenSample[0].play();
+                }else{
+                    alert('error');
+                } 
+
+            }
+            
+            // ぱーのとき  -------------------
+            if(_mySelect === 2){
+                console.log('4試合結果：' + judgeAll());
+                if(_result === "win"){
+                    if(win === special){ 
+                        specialSample[0].play();
+                    }
+                    clapSample[0].play();
+                }else if(_result === "lose"){
+                    if(count !== 4){
+                        loseSample[0].play();
+                    }
+                }else if(_result === "even"){
+                    evenSample[0].play();
+                }else{
+                    alert('error');
+                } 
+
+            }
+        }
+
+        function playFxAudio(resultAll){
+            //count === 4のときの試合結果に応じてエフェクト音を
+            if(resultAll === "awesome"){
+                //4連勝のとき
+                console.log('AWESOME');
+                specialSample[1].play();
+            } else if(resultAll === "bad"){
+                //4連敗のとき
+                console.log('BAD');
+                loseSample[1].play();
+            } else if(resultAll === "good"){
+                //それ以外の戦績のとき
+                console.log('GOOD');
+                specialSample[0].play();
+            }
+        }
+
+
+
+        // アニメーションを描画する -------------------------------
+        function drawAnimation(result, mySelect,resultAll){
+            _result = result;
+            _mySelect = mySelect;
+            _resultAll = resultAll;
+
+            // 複数アニメーションは配列管理じゃないと無理っぽい。
+            // if(_resultAll === "awesome"){
+            //     console.log('test');
+            //     animation = new Anim_gu_special();
+            // }
+
+            // // 0:gu  1:cho  2:par 
+            
+            // ぐーのとき
+            if(_mySelect === 0){
+                if(_result === "win"){
+                   // if(win === special){
+                        //console.log('special描画');
+                       // animation = new Anim_gu_special();
+                   // }else{
+                        animation = new Anim_gu_win();              
+                   // }
+                } else if(_result === "lose"){
+                    animation = new Anim_gu_lose();
+                } else {
+                    animation = new Anim_even();
+                }
+            }
+            // ちょきのとき
+            if(_mySelect === 1){
+                if(_result === "win"){
+                    animation = new Anim_cho_win(); 
+                    console.log('chokianime');             
+                } else if(_result === "lose"){
+                    animation = new Anim_gu_lose();
+                } else {
+                    animation = new Anim_even();
+                }
+            }
+            
+            // ぱーのとき
+            if(_mySelect === 2){
+                if(_result === "win"){
+                    animation = new Anim_par_win();        
+                    console.log('Paranime');             
+                } else if(_result === "lose"){
+                    animation = new Anim_gu_lose();
+                } else {
+                    animation = new Anim_even();
+                }
+            }
+        }
+
+        // 勝敗の結果をページ上にテキスト表示する------------------
+        function showResult(result, resultAll){
+            _result = result;
+            _resultAll = resultAll;
+
+            // 4連勝時
+            if(_resultAll === "awesome"){
+                showThambsUp();
+            }
+
+            if(_result === "win"){
+                $('#result').text('win');
+            }else if(_result === "lose"){
+                $('#result').text('lose');   
+            }else if(_result === "even"){
+                $('#result').text('even');
+            }else{
+                alert('error');
+            } 
+
+        }
+
+        // PCの次の手をテキスト表示 --------------------------------
+        function nextPcHand(pcSelect){
+            _pcSelect = pcSelect;
+            $('#pc').text(transelatePcSelect(_pcSelect)); 
+            // 数値管理していた手を文字列に変換する   
+        }
+ 
+        // 勝ったとき、サムズアップマークを表示
+        function showThambsUp(){
+            $('#thumbs_up').css('opacity', '1');
+            setTimeout(function(){
+                $('#thumbs_up').css('opacity', '0');
+            },700);
+        }
+        
+        //CANVASのリサイズ-------------------------------------------
+    
+        function windowResized(){
+            resizeCanvas(windowWidth, windowHeight);
+        }
+
+
+    </script>
+</body>
+</html>

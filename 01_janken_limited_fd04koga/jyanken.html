@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="stylesheet.css">
+    <title>じゃんけん</title>
+</head>
+<body>
+    <header>
+        <h1>賭博黙示録じゃんけん</h1>
+        <div id="header_box"></div>
+    </header>
+    <main>
+        <!-- カードエリア -->
+        <div class="card">
+        <div ><!-- 相手ボタン -->
+            <ul>
+                <li id="he_btn1"><img src="./jpg/裏面.jpg"></li>
+                <li id="he_btn2"><img src="./jpg/裏面.jpg"></li>
+                <li id="he_btn3"><img src="./jpg/裏面.jpg"></li>
+                <li id="he_btn4"><img src="./jpg/裏面.jpg"></li>
+                <li id="he_btn5"><img src="./jpg/裏面.jpg"></li>
+                <li id="he_btn6"><img src="./jpg/裏面.jpg"></li>
+            </ul>
+        </div>
+
+        <div><!-- 自分ボタン -->
+            <ul>
+                <li class="btn1" id="btn1"></li>
+                <li class="btn2" id="btn2"></li>
+                <li class="btn3" id="btn3"></li>
+                <li class="btn4" id="btn4"></li>
+                <li class="btn5" id="btn5"></li>
+                <li class="btn6" id="btn6"></li>
+            </ul>
+        </div>
+        </div>
+
+        <div class="com_hand" id="com_hand">相手の出した手は？</div>
+
+        <div class="judgment" id="judgment">結果は？</div>
+
+        <!-- ヒントボタンエリア -->
+        <div class="kakin_box"> 
+        <button id="kakin1">50支払う</button>
+        <button id="kakin2">50支払う</button>
+        <button id="kakin3">50支払う</button>
+        <button id="kakin4">50支払う</button>
+        </div>
+      
+        <!-- モーダルエリア0ここから -->        
+        <section id="modalArea0" class="modalArea">
+                <div id="modalBg0" class="modalBg"></div>
+                <div class="modalWrapper0">
+                  <div>
+                    <p id="modal_text0"></p>
+                  </div>
+                  <div id="closeModal0" class="closeModal">
+                    ×
+                  </div>
+                </div>
+              </section>
+        <!-- モーダルエリア１ここから -->
+        <section id="modalArea1" class="modalArea">
+          <div id="modalBg1" class="modalBg"></div>
+          <div class="modalWrapper">
+            <div>
+              <p id="modal_text1"></p>
+            </div>
+            <div id="closeModal1" class="closeModal">
+              ×
+            </div>
+          </div>
+        </section>
+        <!-- モーダルエリア2ここから -->
+        <section id="modalArea2" class="modalArea">
+          <div id="modalBg2" class="modalBg"></div>
+          <div class="modalWrapper">
+            <div>
+              <p id="modal_text2"></p>
+            </div>
+            <div id="closeModal2" class="closeModal">
+              ×
+            </div>
+          </div>
+        </section>
+        <!-- モーダルエリア3ここから -->
+        <section id="modalArea3" class="modalArea">
+          <div id="modalBg3" class="modalBg"></div>
+          <div class="modalWrapper">
+            <div>
+              <p id="modal_text3"></p>
+            </div>
+            <div id="closeModal3" class="closeModal">
+              ×
+            </div>
+          </div>
+        </section>
+        <!-- モーダルエリア4ここから -->
+        <section id="modalArea4" class="modalArea">
+          <div id="modalBg4" class="modalBg"></div>
+          <div class="modalWrapper">
+            <div>
+              <p id="modal_text4"></p>
+            </div>
+            <div id="closeModal4" class="closeModal">
+              ×
+            </div>
+          </div>
+        </section>
+
+        <div class="yen_box">
+        <p>残金 : <span class="yen_count">100</span></p>
+        </div>
+
+    </main>   
+    <footer>
+        <!-- もう一回エリア -->
+        <div id="onecemore" class="onecemore">もう一回</div>
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(function () {
+
+// 読み込み時処理
+            $(document).ready( function(){
+            $('#modalArea0').fadeIn();
+            $('#closeModal0 , #modalBg0').click(function(){
+            $('#modalArea0').fadeOut();
+            });
+            $('#modal_text0').append('あなたと相手にグー、チョキ、パーのカードがランダムに6枚配られます。<br>6回勝負し、勝ち残って下さい。');
+            });
+                    
+// 配列作成コーナー
+            const result = ['グー','チョキ','パー']//配列作成//0:グー,1チョキ,2パー
+            const picme=['<img src="./jpg/上グー.jpg">','<img src="./jpg/上チョキ.jpg">','<img src="./jpg/上パー.jpg">']
+            const pic =['<img src="./jpg/下グー.jpg">','<img src="./jpg/下チョキ.jpg">','<img src="./jpg/下パー.jpg">'];
+            var array =[];
+            var arrayme =[];
+
+// 相手手札の配列作成
+            var x = Math.floor(Math.random() * 3);
+            array.push(x);
+            var x = Math.floor(Math.random() * 3);
+            array.push(x);
+            var x = Math.floor(Math.random() * 3);
+            array.push(x);
+            var x = Math.floor(Math.random() * 3);
+            array.push(x);
+            var x = Math.floor(Math.random() * 3);
+            array.push(x);
+            var x = Math.floor(Math.random() * 3);
+            array.push(x);
+
+// 自分手札の配列作成
+            var x = Math.floor(Math.random() * 3);
+            arrayme.push(x);
+            var x = Math.floor(Math.random() * 3);
+            arrayme.push(x);
+            var x = Math.floor(Math.random() * 3);
+            arrayme.push(x);
+            var x = Math.floor(Math.random() * 3);
+            arrayme.push(x);
+            var x = Math.floor(Math.random() * 3);
+            arrayme.push(x);
+            var x = Math.floor(Math.random() * 3);
+            arrayme.push(x);
+
+// 自分の手札配列に画像割り当て
+            $('.btn1').html(picme[arrayme[0]]);
+            $('.btn2').html(picme[arrayme[1]]);
+            $('.btn3').html(picme[arrayme[2]]);      
+            $('.btn4').html(picme[arrayme[3]]);
+            $('.btn5').html(picme[arrayme[4]]);   
+            $('.btn6').html(picme[arrayme[5]]);
+
+// 作業しやすくするためコンソール配列表示
+            console.log('0:グー,1チョキ,2パー');
+            console.log('自分の配列');
+            console.log(arrayme);
+            console.log('相手の配列');
+            console.log(array);
+            
+// ヒントコーナー
+// ヒント1
+            let countUpValue = 0;
+            $('#kakin1').on('click', function(){ 
+                let yen = parseInt($(".yen_count").text());
+                if (yen < 50) {
+                    alert('お金が足りません')
+                }else{
+                    //モーダル
+                    $('#modalArea1').fadeIn();
+                    $('#closeModal1 , #modalBg1').click(function(){
+                    $('#modalArea1').fadeOut();
+                    });
+                    //ヒント処理
+                    console.log(countUpValue);
+                    $('#modal_text1').empty();
+                    for(i=0; i<array.length; i++){                       
+                        $('#modal_text1').append('相手の手札の１つは：' + result[array[i]]+'<br>');
+                    }
+                    //精算
+                    let yen = parseInt($(".yen_count").text());
+                    yen = yen - 50;
+                    $(".yen_count").text(yen);    
+                }
+            }); 
+
+// ヒント2
+            $('#kakin2').on('click', function(){ 
+                let yen = parseInt($(".yen_count").text());
+                if (yen < 50) {
+                    alert('お金が足りません')
+                }else{
+                    //モーダル
+                    $('#modalArea2').fadeIn();
+                    $('#closeModal2 , #modalBg2').click(function(){
+                    $('#modalArea2').fadeOut();
+                    });
+                    //ヒント処理
+                    $('#modal_text2').empty();
+                    $('#modal_text2').append(result[array[0]]+'が含まれている');
+                    //精算
+                    yen = parseInt($(".yen_count").text());
+                    yen = yen - 50;
+                    $(".yen_count").text(yen);
+                }
+            }); 
+
+// ヒント3
+            $('#kakin3').on('click', function(){ 
+                let yen = parseInt($(".yen_count").text());
+                if (yen < 50) {
+                    alert('お金が足りません')
+                }else{
+                    //モーダル
+                    $('#modalArea3').fadeIn();
+                    $('#closeModal3 , #modalBg3').click(function(){
+                    $('#modalArea3').fadeOut();
+                    });
+                    //ヒント処理
+                    $('#modal_text3').empty();
+                    count = array.filter(function (element) { return element === 2; }).length;
+                    $('#modal_text3').append('相手のパーは' + count +'枚');
+                    //精算
+                    yen = parseInt($(".yen_count").text());
+                    yen = yen - 50;
+                    $(".yen_count").text(yen);
+                }
+            }); 
+
+// ヒント4
+            $('#kakin4').on('click', function(){ 
+                let yen = parseInt($(".yen_count").text());
+                if (yen < 50) {
+                    alert('お金が足りません')
+                }else{
+                    //モーダル
+                    $('#modalArea4').fadeIn();
+                    $('#closeModal4 , #modalBg4').click(function(){
+                    $('#modalArea4').fadeOut();
+                    });
+                    $('#modal_text4').empty();
+                    $('#modal_text4').append('相手のカードを強制的にシャッフルしました');
+                    //ヒント処理
+                    
+                    count = array.length;
+                    if (count == 6) {
+                        array.length = 0;
+                        var x = Math.floor(Math.random() * 3);
+                        array.push(x);
+                        var x = Math.floor(Math.random() * 3);
+                        array.push(x);
+                        var x = Math.floor(Math.random() * 3);
+                        array.push(x);
+                        var x = Math.floor(Math.random() * 3);
+                        array.push(x);
+                        var x = Math.floor(Math.random() * 3);
+                        array.push(x);
+                        var x = Math.floor(Math.random() * 3);
+                        array.push(x); 
+                        console.log('変更後相手の配列');
+                        console.log(array); 
+                    }else if (count == 5) {
+                        array.length = 0;
+                        var x = Math.floor(Math.random() * 3);
+                        array.push(x);
+                        var x = Math.floor(Math.random() * 3);
+                        array.push(x);
+                        var x = Math.floor(Math.random() * 3);
+                        array.push(x);
+                        var x = Math.floor(Math.random() * 3);
+                        array.push(x);
+                        var x = Math.floor(Math.random() * 3);
+                        array.push(x); 
+                        console.log('変更後相手の配列');
+                        console.log(array);
+                    }else if (count == 4) {
+                        array.length = 0;
+                        var x = Math.floor(Math.random() * 3);
+                        array.push(x);
+                        var x = Math.floor(Math.random() * 3);
+                        array.push(x);
+                        var x = Math.floor(Math.random() * 3);
+                        array.push(x);
+                        var x = Math.floor(Math.random() * 3);
+                        array.push(x);
+                        console.log('変更後相手の配列');
+                        console.log(array);
+                    }else if (count == 3) {
+                        array.length = 0;
+                        var x = Math.floor(Math.random() * 3);
+                        array.push(x);
+                        var x = Math.floor(Math.random() * 3);
+                        array.push(x);
+                        var x = Math.floor(Math.random() * 3);
+                        array.push(x); 
+                        console.log('変更後相手の配列');
+                        console.log(array);
+                    }else if (count == 2) {
+                        array.length = 0;
+                        var x = Math.floor(Math.random() * 3);
+                        array.push(x);
+                        var x = Math.floor(Math.random() * 3);
+                        array.push(x);
+                        console.log('変更後相手の配列');
+                        console.log(array);
+                    }else if (count == 1) {
+                        array.length = 0;
+                        var x = Math.floor(Math.random() * 3);
+                        array.push(x);
+                        console.log('変更後相手の配列');
+                        console.log(array);
+                    }
+                    $('#modal_text4').append('OK');
+                    //精算
+                    yen = parseInt($(".yen_count").text());
+                    yen = yen - 50;
+                    $(".yen_count").text(yen);
+                }
+            }); 
+               
+// ジャンケンコーナー
+// １個目のボタン
+            $('#btn1').one('click', function(){
+                var r = Math.floor(Math.random() * array.length);
+                console.log('相手の手');
+                console.log(array[r]);
+                $('#he_btn1').html(pic[array[r]]);
+                $('#he_btn1').fadeTo('slow', 0.2);//相手btnを徐々に透明に 
+                $('#com_hand').text('相手の手：' + result[array[r]]);//com_handの書き換え。result[rand]はrand番号でのresult配列の呼び出し。ex)ランダム0生成→配列0のグー呼び出し
+                $('#btn1').fadeTo('slow', 0.2);//自分の手クリックで徐々に透明に
+                if (arrayme[0] == 0) { //自分0グー
+                        if (array[r] == 0) {//相手0グー
+                            $('#judgment').text('あいこ'); //judgmentをあいこに書き換え 
+                        }else if (array[r] == 1) {//相手1チョキ
+                            $('#judgment').text('かち'); //judgmentをかちこに書き換え 
+                        }else{//相手2パー
+                            $('#judgment').text('まけ'); //judgmentをまけに書き換え 
+                        }
+                    }else if (arrayme[0] == 1) { //自分1チョキ
+                        if (array[r] == 0) {//相手0グー
+                            $('#judgment').text('まけ'); 
+                        }else if (array[r] == 1) {//相手1チョキ
+                            $('#judgment').text('あいこ'); 
+                        }else{//相手2パー
+                            $('#judgment').text('かち'); 
+                        }
+                    }else{ //自分2パー
+                    if (array[r]==0) {//相手0グー
+                        $('#judgment').text('かち'); 
+                    }else if (array[r]==1) {//相手1チョキ
+                        $('#judgment').text('まけ'); 
+                    }else{//相手2パー
+                        $('#judgment').text('あいこ');
+                    }         
+                    }
+                    for(i=0; i<array.length; i++){
+                    if(array[i] == array[r]){                  
+                    array.splice(i, 1);//spliceメソッドで要素を削除
+                    console.log('相手の残り配列');
+                    console.log(array);
+                    break;
+                        }
+                    }
+                    if ($('#judgment').text() == 'かち') {
+                    let yen = parseInt($(".yen_count").text());
+                    yen = yen + 100;
+                    $(".yen_count").text(yen);    
+                    }else if ($('#judgment').text() == 'まけ') {
+                    let yen = parseInt($(".yen_count").text());
+                    yen = yen - 100;
+                    $(".yen_count").text(yen);  
+                    }            
+            });    
+
+// ２個目のボタン
+            $('#btn2').one('click', function(){
+                var r = Math.floor(Math.random() * array.length);
+                console.log('相手の手');
+                console.log(array[r]);
+                $('#he_btn2').html(pic[array[r]]);
+                $('#he_btn2').fadeTo('slow', 0.2);//相手btnを徐々に透明に 
+                $('#com_hand').text('相手の手：' + result[array[r]]);//com_handの書き換え。result[rand]はrand番号でのresult配列の呼び出し。ex)ランダム0生成→配列0のグー呼び出し
+                $('#btn2').fadeTo('slow', 0.2);//自分の手クリックで徐々に透明に
+                if (arrayme[1] == 0) { //自分0グー
+                    if (array[r]==0) {//相手0グー
+                        $('#judgment').text('あいこ'); //judgmentをあいこに書き換え 
+                    }else if (array[r]==1) {//相手1チョキ
+                        $('#judgment').text('かち'); //judgmentをかちこに書き換え 
+                    }else{//相手2パー
+                        $('#judgment').text('まけ'); //judgmentをまけに書き換え 
+                    }
+                }else if (arrayme[1] == 1) { //自分1チョキ
+                    if (array[r]==0) {//相手0グー
+                        $('#judgment').text('まけ'); 
+                    }else if (array[r]==1) {//相手1チョキ
+                        $('#judgment').text('あいこ'); 
+                    }else{//相手2パー
+                        $('#judgment').text('かち'); 
+                    }
+                }else{ //自分2パー
+                    if (array[r]==0) {//相手0グー
+                        $('#judgment').text('かち'); 
+                    }else if (array[r]==1) {//相手1チョキ
+                        $('#judgment').text('まけ'); 
+                    }else{//相手2パー
+                        $('#judgment').text('あいこ');
+                    }         
+                    }
+                for(i=0; i<array.length; i++){
+                if(array[i] == array[r]){                  
+                array.splice(i, 1);//spliceメソッドで要素を削除
+                console.log('相手の残り配列');
+                console.log(array);
+                break;
+                    }
+                }
+                if ($('#judgment').text() == 'かち') {
+                let yen = parseInt($(".yen_count").text());
+                yen = yen + 100;
+                $(".yen_count").text(yen);    
+                }else if ($('#judgment').text() == 'まけ') {
+                let yen = parseInt($(".yen_count").text());
+                yen = yen - 100;
+                $(".yen_count").text(yen);  
+                }            
+            });    
+
+// ３個目のボタン
+            $('#btn3').one('click', function(){
+                var r = Math.floor(Math.random() * array.length);
+                console.log('相手の手');
+                console.log(array[r]);
+                $('#he_btn3').html(pic[array[r]]);
+                $('#he_btn3').fadeTo('slow', 0.2);//相手btnを徐々に透明に 
+                $('#com_hand').text('相手の手：' + result[array[r]]);//com_handの書き換え。result[rand]はrand番号でのresult配列の呼び出し。ex)ランダム0生成→配列0のグー呼び出し
+                $('#btn3').fadeTo('slow', 0.2);//自分の手クリックで徐々に透明に
+                if (arrayme[2] == 0) { //自分0グー
+                    if (array[r]==0) {//相手0グー
+                        $('#judgment').text('あいこ'); //judgmentをあいこに書き換え 
+                    }else if (array[r]==1) {//相手1チョキ
+                        $('#judgment').text('かち'); //judgmentをかちこに書き換え 
+                    }else{//相手2パー
+                        $('#judgment').text('まけ'); //judgmentをまけに書き換え 
+                    }
+                    }else if (arrayme[2] == 1) { //自分1チョキ
+                    if (array[r]==0) {//相手0グー
+                        $('#judgment').text('まけ'); 
+                    }else if (array[r]==1) {//相手1チョキ
+                        $('#judgment').text('あいこ'); 
+                    }else{//相手2パー
+                        $('#judgment').text('かち'); 
+                    }
+                    }else{ //自分2パー
+                    if (array[r]==0) {//相手0グー
+                        $('#judgment').text('かち'); 
+                    }else if (array[r]==1) {//相手1チョキ
+                        $('#judgment').text('まけ'); 
+                    }else{//相手2パー
+                        $('#judgment').text('あいこ');
+                    }         
+                    }
+                    for(i=0; i<array.length; i++){
+                    if(array[i] == array[r]){                  
+                    array.splice(i, 1);//spliceメソッドで要素を削除
+                    console.log('相手の残り配列');
+                    console.log(array);
+                    break;
+                        }
+                    }
+                    if ($('#judgment').text() == 'かち') {
+                    let yen = parseInt($(".yen_count").text());
+                    yen = yen + 100;
+                    $(".yen_count").text(yen);    
+                    }else if ($('#judgment').text() == 'まけ') {
+                    let yen = parseInt($(".yen_count").text());
+                    yen = yen - 100;
+                    $(".yen_count").text(yen);  
+                    }            
+            });    
+
+// 4個目のボタン
+            $('#btn4').one('click', function(){
+                var r = Math.floor(Math.random() * array.length);
+                console.log('相手の手');
+                console.log(array[r]);
+                $('#he_btn4').html(pic[array[r]]);
+                $('#he_btn4').fadeTo('slow', 0.2);//相手btnを徐々に透明に 
+                $('#com_hand').text('相手の手：' + result[array[r]]);//com_handの書き換え。result[rand]はrand番号でのresult配列の呼び出し。ex)ランダム0生成→配列0のグー呼び出し
+                $('#btn4').fadeTo('slow', 0.2);//自分の手クリックで徐々に透明に
+                if (arrayme[3] == 0) { //自分0グー
+                    if (array[r]==0) {//相手0グー
+                        $('#judgment').text('あいこ'); //judgmentをあいこに書き換え 
+                    }else if (array[r]==1) {//相手1チョキ
+                        $('#judgment').text('かち'); //judgmentをかちこに書き換え 
+                    }else{//相手2パー
+                        $('#judgment').text('まけ'); //judgmentをまけに書き換え 
+                    }
+                    }else if (arrayme[3] == 1) { //自分1チョキ
+                    if (array[r]==0) {//相手0グー
+                        $('#judgment').text('まけ'); 
+                    }else if (array[r]==1) {//相手1チョキ
+                        $('#judgment').text('あいこ'); 
+                    }else{//相手2パー
+                        $('#judgment').text('かち'); 
+                    }
+                    }else{ //自分2パー
+                    if (array[r]==0) {//相手0グー
+                        $('#judgment').text('かち'); 
+                    }else if (array[r]==1) {//相手1チョキ
+                        $('#judgment').text('まけ'); 
+                    }else{//相手2パー
+                        $('#judgment').text('あいこ');
+                    }         
+                    }
+                    for(i=0; i<array.length; i++){
+                    if(array[i] == array[r]){                  
+                    array.splice(i, 1);//spliceメソッドで要素を削除
+                    console.log('相手の残り配列');
+                    console.log(array);
+                    break;
+                        }
+                    }
+                    if ($('#judgment').text() == 'かち') {
+                    let yen = parseInt($(".yen_count").text());
+                    yen = yen + 100;
+                    $(".yen_count").text(yen);    
+                    }else if ($('#judgment').text() == 'まけ') {
+                    let yen = parseInt($(".yen_count").text());
+                    yen = yen - 100;
+                    $(".yen_count").text(yen);  
+                    }            
+            });    
+
+//５個目のボタン
+            $('#btn5').one('click', function(){
+                var r = Math.floor(Math.random() * array.length);
+                console.log('相手の手');
+                console.log(array[r]);
+                $('#he_btn5').html(pic[array[r]]);
+                $('#he_btn5').fadeTo('slow', 0.2);//相手btnを徐々に透明に 
+                $('#com_hand').text('相手の手：' + result[array[r]]);//com_handの書き換え。result[rand]はrand番号でのresult配列の呼び出し。ex)ランダム0生成→配列0のグー呼び出し
+                $('#btn5').fadeTo('slow', 0.2);//自分の手クリックで徐々に透明に
+                if (arrayme[4] == 0) { //自分0グー
+                    if (array[r]==0) {//相手0グー
+                        $('#judgment').text('あいこ'); //judgmentをあいこに書き換え 
+                    }else if (array[r]==1) {//相手1チョキ
+                        $('#judgment').text('かち'); //judgmentをかちこに書き換え 
+                    }else{//相手2パー
+                        $('#judgment').text('まけ'); //judgmentをまけに書き換え 
+                    }
+                    }else if (arrayme[4] == 1) { //自分1チョキ
+                    if (array[r]==0) {//相手0グー
+                        $('#judgment').text('まけ'); 
+                    }else if (array[r]==1) {//相手1チョキ
+                        $('#judgment').text('あいこ'); 
+                    }else{//相手2パー
+                        $('#judgment').text('かち'); 
+                    }
+                    }else{ //自分2パー
+                    if (array[r]==0) {//相手0グー
+                        $('#judgment').text('かち'); 
+                    }else if (array[r]==1) {//相手1チョキ
+                        $('#judgment').text('まけ'); 
+                    }else{//相手2パー
+                        $('#judgment').text('あいこ');
+                    }         
+                    }
+                    for(i=0; i<array.length; i++){
+                    if(array[i] == array[r]){                  
+                    array.splice(i, 1);//spliceメソッドで要素を削除
+                    console.log('相手の残り配列');
+                    console.log(array);
+                    break;
+                        }
+                    }
+                    if ($('#judgment').text() == 'かち') {
+                    let yen = parseInt($(".yen_count").text());
+                    yen = yen + 100;
+                    $(".yen_count").text(yen);    
+                    }else if ($('#judgment').text() == 'まけ') {
+                    let yen = parseInt($(".yen_count").text());
+                    yen = yen - 100;
+                    $(".yen_count").text(yen);  
+                    }            
+            });  
+
+// ６個目のボタン
+            $('#btn6').one('click', function(){
+                var r = Math.floor(Math.random() * array.length);
+                console.log('相手の手');
+                console.log(array[r]);
+                $('#he_btn6').html(pic[array[r]]);
+                $('#he_btn6').fadeTo('slow', 0.2);//相手btnを徐々に透明に 
+                $('#com_hand').text('相手の手：' + result[array[r]]);//com_handの書き換え。result[rand]はrand番号でのresult配列の呼び出し。ex)ランダム0生成→配列0のグー呼び出し
+                $('#btn6').fadeTo('slow', 0.2);//自分の手クリックで徐々に透明に
+                if (arrayme[5] == 0) { //自分0グー
+                    if (array[r]==0) {//相手0グー
+                        $('#judgment').text('あいこ'); //judgmentをあいこに書き換え 
+                    }else if (array[r]==1) {//相手1チョキ
+                        $('#judgment').text('かち'); //judgmentをかちこに書き換え 
+                    }else{//相手2パー
+                        $('#judgment').text('まけ'); //judgmentをまけに書き換え 
+                    }
+                    }else if (arrayme[5] == 1) { //自分1チョキ
+                    if (array[r]==0) {//相手0グー
+                        $('#judgment').text('まけ'); 
+                    }else if (array[r]==1) {//相手1チョキ
+                        $('#judgment').text('あいこ'); 
+                    }else{//相手2パー
+                        $('#judgment').text('かち'); 
+                    }
+                    }else{ //自分2パー
+                    if (array[r]==0) {//相手0グー
+                        $('#judgment').text('かち'); 
+                    }else if (array[r]==1) {//相手1チョキ
+                        $('#judgment').text('まけ'); 
+                    }else{//相手2パー
+                        $('#judgment').text('あいこ');
+                    }         
+                    }
+                    for(i=0; i<array.length; i++){
+                    if(array[i] == array[r]){                  
+                    array.splice(i, 1);//spliceメソッドで要素を削除
+                    console.log('相手の残り配列');
+                    console.log(array);
+                    break;
+                        }
+                    }
+                    if ($('#judgment').text() == 'かち') {
+                    let yen = parseInt($(".yen_count").text());
+                    yen = yen + 100;
+                    $(".yen_count").text(yen);    
+                    }else if ($('#judgment').text() == 'まけ') {
+                    let yen = parseInt($(".yen_count").text());
+                    yen = yen - 100;
+                    $(".yen_count").text(yen);  
+                    }            
+            });  
+        
+// 背景画像
+            $(function(){
+                setTimeout(function(){
+                    $("#header_box").addClass('header_box');
+                    $("#header_box").stop().animate({opacity:'1'},1000);
+                },40000);
+            });
+
+// もう一回
+            $('#onecemore').click(function() {
+            location.reload();
+            }); 
+
+        }); 
+    </script>
+</body>
+</html>

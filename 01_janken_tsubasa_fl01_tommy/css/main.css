@@ -1,0 +1,603 @@
+@font-face {
+	font-family: 'JF-Dot-K12';
+	src: url(../font/JF-Dot-K12.ttf);
+}
+
+body{
+    width:800px;    
+    line-height: 0.5;
+    font-family: JF-Dot-K12;
+    letter-spacing: 4px;
+}
+
+.main{
+    width:800px;
+    height:400px;
+    background-color: rgb(131, 231, 231);
+    position: relative;
+    overflow: hidden;
+}
+.sora{
+    width:800px;
+    height:144px;
+    background-image: url(../png/sora.png);
+    position: absolute;
+}
+.stand{
+    width:1000px;
+    height:114px;
+    top: 136px;
+    display:flex;
+    position:absolute;
+    overflow:hidden;
+    z-index:5;
+    animation: infinity-loop 60s infinite linear 0s both;
+}
+@keyframes infinity-loop {
+from {
+	transform: translateX(0vw);
+}
+to {
+	transform: translateX(-144px);
+}
+}
+
+.ground-base{
+    width:800px;
+    height:150px;
+    top:250px;
+    position: absolute;
+    overflow:hidden;
+    background-color:#0D9300;
+    z-index: 5;
+
+}
+.ground{
+    width:800px;
+    height:150px;
+    top:250px;
+    position: absolute;
+    overflow:hidden;
+    background:url(../png/groundx.png);
+    animation:para 0.5s steps(1,end) infinite;
+    z-index: 10;
+
+}
+@keyframes para {
+    50% {background-position:-800px;}
+}
+
+.window-box{
+    width:800px;
+    height:200px;
+    background-color: rgb(0, 0, 0);
+    display:flex;
+    
+}
+
+.window-l{
+    width:200px;
+    height:200px;
+    padding: 10px 20px;
+    font-weight: bold;
+    color: #ffffff;/*文字色*/
+    background: rgb(0, 0, 0);
+    box-sizing: border-box;
+    border: solid 3px #ffffff;/*線*/
+    border-radius: 10px;/*角の丸み*/
+    position: relative;
+}
+
+.window-r{
+    width:600px;
+    height:200px;
+    padding: 0px 20px;
+    font-weight: bold;
+    font-size: 28px;
+    color: #ffffff;/*文字色*/
+    background: rgb(0, 0, 0);
+    box-sizing: border-box;
+    border: solid 3px #ffffff;/*線*/
+    border-radius: 10px;/*角の丸み*/
+}
+
+.window-wide{
+    width:800px;
+    height:200px;
+    padding: 30px 40px;
+    font-weight: bold;
+    font-size:30px;
+    color: #ffffff;/*文字色*/
+    background: rgb(0, 0, 0);
+    box-sizing: border-box;
+    border: solid 3px #ffffff;/*線*/
+    border-radius: 10px;/*角の丸み*/
+    position: absolute;
+    overflow: visible;
+    z-index:100;
+}
+.main-pos{
+    display:none;
+}
+
+
+.black{
+    width:800px;
+    height:400px;
+    background-color: black;
+    position: absolute;;
+    z-index: 100;
+    display:none;
+}
+.goal_post{
+    width:180px;
+    height:400px;
+    position: absolute;
+    z-index:50;
+    background-image: url(../png/goalpost.png);
+    display:none;
+}
+.vs{
+    width:690px;
+    height:292px;
+    position: absolute;
+    z-index:50;
+    background-image: url(../png/vs.png);
+    top:108px;
+    left:36px;
+    display:none;
+}
+.goal{
+    width:480px;
+    height:192px;
+    position: absolute;
+    z-index:110;
+    top:104px;
+    left:160px;
+    background-image: url(../png/goal.png);
+    display:none;
+}
+.sinpan{
+    width:384px;
+    height:192px;
+    position: absolute;
+    z-index:110;
+    top:104px;
+    left:208px;
+    background-image: url(../png/sinpan.png);
+    display:none;
+}
+.win{
+    width:360px;
+    height:180px;
+    position: absolute;
+    z-index:110;
+    top:110px;
+    left:220px;
+    background-image: url(../png/win.png);
+    display:none;
+}
+.sora_all{
+    width:800px;
+    height:400px;
+    position: absolute;
+    z-index:30;
+    background-image: url(../png/sora_all.png);
+    display:none;
+}
+/* 味方モーション関連ーーーーーーーーーーーーーーーーーーーーーーー */
+/* シュート ---------------------------------------------------------------
+----------------------------------------------------------------------------*/
+.shoot_container{
+    z-index:80;
+    position: absolute;
+    animation:moveleft 4s linear 0s both;
+    display:none;
+}
+.shootanim{
+    width:186px;
+    height:285px;
+    top:65px;
+    left:307px;
+    position: absolute;
+    overflow:hidden;
+    background:url(../png/chara/shoot.png);
+    animation:shoot 4s steps(1,end);
+    /* animation: infinity-loop 15s infinite linear 0s both; */
+    /* animation:moveleft 4s infinite linear 0s both; */
+
+    z-index: 15;
+}
+@keyframes shoot {
+    50% {background-position:-187px;}
+} 
+@keyframes moveleft{
+    0%{transform: translateX(50px);}
+    100%{ transform: translateX(0px);}
+}
+.shootanim_ball{
+    z-index:90;
+    width:48px;
+    height:48px;
+    top:302px;
+    left:320px;
+    position: absolute;
+    background:url(../png/ball-s.png);
+    animation:shootanim_ball 4s linear;
+}
+@keyframes shootanim_ball{
+    0%{transform:translateY(0px) scale(1);}
+    50%{transform:translateY(-30px) scale(1);}
+    100%{transform:translateY(-200px) scale(30);}
+}
+
+/* -----------------------------------------------------------------
+--------------------------------------------------------------------------------- */
+/* パス---------------------------------------------------------------
+----------------------------------------------------------------------------*/
+.pass_container{
+    z-index:80;
+    position: absolute;
+    display:none;
+}
+.passanim{
+    width:186px;
+    height:285px;
+    top:65px;
+    left:550px;
+    position: absolute;
+    overflow:hidden;
+    background:url(../png/chara/shoot.png);
+    animation:pass 4s steps(1);
+    /* animation: infinity-loop 15s infinite linear 0s both; */
+    /* animation:moveleft 4s infinite linear 0s both; */
+
+}
+@keyframes pass {
+    25% {background-position:-187px;}
+    100%{background-position:-187px;}
+} 
+.passanim_ball{
+    z-index:90;
+    width:48px;
+    height:48px;
+    top:302px;
+    left:570px;
+    position: absolute;
+    background:url(../png/ball-s.png);
+    animation:passanim_ball 4s;
+}
+@keyframes passanim_ball{
+    0%{transform:translateY(0px) translateX(0px) scale(1);}
+    25%{transform:translateY(-50px) translateX(0px) scale(1);}
+    100%{transform:translateY(-600px) translateX(-600px) scale(10);}
+}
+
+/* ドリブル -------------------------------------------------------------
+---------------------------------------------------------------------------*/
+.drible_container{
+    z-index:81;
+    position: absolute;
+    animation:movefast 4s infinite linear 0s both;
+    display:none;
+}
+.dribleanim{
+    width:165px;
+    height:288px;
+    top:62px;
+    left:327px;
+    position: absolute;
+    overflow:hidden;
+    background:url(../png/chara/drible.png);
+    animation:drible 0.4s steps(3) infinite;
+    /* animation: infinity-loop 15s infinite linear 0s both; */
+    /* animation:moveleft 4s infinite linear 0s both; */
+
+}
+@keyframes movefast{
+    0%{transform:translateX(40px)}
+    8%{transform:translateX(-120px)}
+    16%{transform:translateX(40px)}
+    24%{transform:translateX(-120px)}
+    32%{transform:translateX(40px)}
+    40%{transform:translateX(-500px)}
+    100%{transform:translateX(-500px)}
+}
+@keyframes drible{
+
+    100%{background-position:-495px;}
+}
+/* --------------------------------------------------------------------------- */
+/* 味方トラップ-------------------------------------- */
+.trap_container{
+    z-index:80;
+    position: absolute;
+    /* display:none; */
+}
+.trapanim{
+    width:174px;
+    height:264px;
+    top:120px;
+    left:100px;
+    position: absolute;
+    overflow:hidden;
+    background:url(../png/chara/trap.png);
+    /* animation: infinity-loop 15s infinite linear 0s both; */
+    /* animation:moveleft 4s infinite linear 0s both; */
+
+}
+.trapanim_ball{
+    z-index:90;
+    width:48px;
+    height:48px;
+    position: absolute;
+    background:url(../png/ball-s.png);
+    animation:trapanim_ball 4s linear;
+}
+@keyframes trapanim_ball{
+    0%{transform:translateY(-200px) translateX(700px) scale(5);}
+    25%{transform:translateY(300px) translateX(160px) scale(1);}
+    100%{transform:translateY(300px) translateX(160px) scale(1);}
+}
+/* --------------------------------------------------------------------------- */
+/* ドリブルデモ----------------------------------------------------------------- */
+.drrible_demo_container{
+    z-index:81;
+    position: absolute;
+    display:none;
+}
+.dribledemoanim{
+    width:165px;
+    height:288px;
+    top:62px;
+    left:327px;
+    position: absolute;
+    overflow:hidden;
+    background:url(../png/chara/drible.png);
+    animation:dribledemo 0.4s steps(3) infinite;
+    /* animation: infinity-loop 15s infinite linear 0s both; */
+    /* animation:moveleft 4s infinite linear 0s both; */
+}
+@keyframes dribledemo{
+    100%{background-position:-495px;}}
+/*--敵キーパーもろもろ  --------------------------------------------------------- */
+/* キーパースルー */
+.keeper_goal_container{
+    z-index:81;
+    position: absolute;
+    animation:movedown 4s linear 0s both;
+    display:none;
+}
+.keeper_goalanim{
+    width:162px;
+    height:189px;
+    top:62px;
+    left:200px;
+    position: absolute;
+    overflow:hidden;
+    background:url(../png/chara/enemy_gk.png);
+    /* animation: infinity-loop 15s infinite linear 0s both; */
+    /* animation:moveleft 4s infinite linear 0s both; */
+}
+@keyframes movedown{
+    0%{transform:translateX(0px) translateY(0px)}
+    25%{transform:translateX(50px) translateY(100px)}
+    100%{transform:translateX(50px) translateY(100px)}
+
+}
+
+.keeper_goal_ball{
+    z-index:90;
+    width:48px;
+    height:48px;
+    top:200px;
+    left:570px;
+    position: absolute;
+    background:url(../png/ball-s.png);
+    animation:keeper_goal_ball 4s;
+}
+@keyframes keeper_goal_ball{
+    0%{transform:translateX(200px) translateX(0px) scale(1);}
+    100%{transform:translateX(-800px) translateX(-600px) scale(5);}
+}
+/* キーパーブロック -------------------------------------------------------*/
+.keeper_block_container{
+    z-index:81;
+    position: absolute;
+    animation:movedown 4s linear 0s both;
+    display: none;
+}
+.keeper_blockanim{
+    width:162px;
+    height:189px;
+    top:62px;
+    left:200px;
+    position: absolute;
+    overflow:hidden;
+    background:url(../png/chara/enemy_gk.png);
+    /* animation: infinity-loop 15s infinite linear 0s both; */
+    /* animation:moveleft 4s infinite linear 0s both; */
+}
+@keyframes movedown{
+    0%{transform:translateX(0px) translateY(0px)}
+    25%{transform:translateX(50px) translateY(100px)}
+    100%{transform:translateX(50px) translateY(100px)}
+
+}
+
+.keeper_block_ball{
+    z-index:90;
+    width:48px;
+    height:48px;
+    top:200px;
+    left:570px;
+    position: absolute;
+    background:url(../png/ball-s.png);
+    animation:keeper_block_ball 4s linear;
+}
+@keyframes keeper_block_ball{
+    0%{transform:translateX(200px) translateY(0px) scale(1);}
+    25%{transform:translateX(-250px) translateY(-20px) scale(2);}
+    /* 35%{transform:translateX(-250px) translateY(-20px) scale(2);} */
+    50%{transform:translateX(300px) translateY(-600px) scale(10);}
+    100%{transform:translateX(300px) translateY(-600px) scale(10);}
+}
+/* --------------------------------------------------------------------- */
+/* 敵タックルもろもろ */
+.tuckle_container{
+    z-index:81;
+    position: absolute;
+    animation:movedown 4s linear 0s both;
+    display:none;
+}
+.tuckleanim{
+    width:183px;
+    height:285px;
+    top:0px;
+    left:200px;
+    position: absolute;
+    overflow:hidden;
+    background:url(../png/chara/enemy_tuckle.png);
+    /* animation: infinity-loop 15s infinite linear 0s both; */
+    /* animation:moveleft 4s infinite linear 0s both; */
+}
+@keyframes movedown{
+    0%{transform:translateX(0px) translateY(0px)}
+    25%{transform:translateX(50px) translateY(100px)}
+    100%{transform:translateX(50px) translateY(100px)}
+
+}
+/* ------------------------------------------------------------ */
+.tuckle_block_container{
+    z-index:81;
+    position: absolute;
+    animation:movedown 4s linear 0s both;
+    display: none;
+}
+.tuckle_blockanim{
+    width:183px;
+    height:285px;
+    top:0px;
+    left:200px;
+    position: absolute;
+    overflow:hidden;
+    background:url(../png/chara/enemy_tuckle.png);
+    /* animation: infinity-loop 15s infinite linear 0s both; */
+    /* animation:moveleft 4s infinite linear 0s both; */
+}
+@keyframes movedown{
+    0%{transform:translateX(0px) translateY(0px)}
+    25%{transform:translateX(50px) translateY(100px)}
+    100%{transform:translateX(50px) translateY(100px)}
+
+}
+
+.tuckle_block_ball{
+    z-index:90;
+    width:48px;
+    height:48px;
+    top:200px;
+    left:570px;
+    position: absolute;
+    background:url(../png/ball-s.png);
+    animation:tuckle_block_ball 4s linear;
+}
+@keyframes tuckle_block_ball{
+    0%{transform:translateX(-200px) translateY(200px) scale(10);}
+    25%{transform:translateX(-250px) translateY(-40px) scale(2);}
+    /* 35%{transform:translateX(-250px) translateY(-20px) scale(2);} */
+    50%{transform:translateX(300px) translateY(-600px) scale(10);}
+    100%{transform:translateX(300px) translateY(-600px) scale(10);}
+}
+
+/* てきブロック-------------------------------------------- */
+.block_container{
+    z-index:81;
+    position: absolute;
+    animation:moveup 4s linear 0s both;
+    display:none;
+}
+.blockanim{
+    width:207px;
+    height:258px;
+    top:250px;
+    left:150px;
+    position: absolute;
+    overflow:hidden;
+    background:url(../png/chara/enemy1.png);
+    /* animation: infinity-loop 15s infinite linear 0s both; */
+    /* animation:moveleft 4s infinite linear 0s both; */
+}
+@keyframes moveup{
+    0%{transform:translateX(0px) translateY(0px)}
+    25%{transform:translateX(50px) translateY(-200px)}
+    100%{transform:translateX(50px) translateY(-200px)}
+
+}
+
+.block_ball{
+    z-index:90;
+    width:48px;
+    height:48px;
+    position: absolute;
+    background:url(../png/ball-s.png);
+    animation:block_ball 4s linear;
+}
+@keyframes block_ball{
+    0%{transform:translateX(800px) translateY(200px) scale(1);}
+    25%{transform:translateX(250px)  translateY(300px) scale(1);}
+    50%{transform:translateX(-300px) translateY(200px) scale(1);}
+    100%{transform:translateX(-800px) translateY(0px) scale(1);}
+}
+/* 敵ブロック成功---------------------------------------*/
+.block_block_container{
+    z-index:81;
+    position: absolute;
+    animation:moveup 4s linear 0s both;
+    display: none;
+}
+.block_blockanim{
+    width:207px;
+    height:258px;
+    top:250px;
+    left:150px;
+    position: absolute;
+    overflow:hidden;
+    background:url(../png/chara/enemy1.png);
+    /* animation: infinity-loop 15s infinite linear 0s both; */
+    /* animation:moveleft 4s infinite linear 0s both; */
+}
+@keyframes moveup{
+    0%{transform:translateX(0px) translateY(0px)}
+    25%{transform:translateX(50px) translateY(-200px)}
+    100%{transform:translateX(50px) translateY(-200px)}
+
+}
+
+.block_block_ball{
+    z-index:90;
+    width:48px;
+    height:48px;
+    position: absolute;
+    background:url(../png/ball-s.png);
+    animation:block_block_ball 4s linear;
+}
+@keyframes block_block_ball{
+    0%{transform:translateX(800px) translateY(200px) scale(1);}
+    25%{transform:translateX(270px)  translateY(300px) scale(1);}
+    100%{transform:translateX(270px) translateY(300px) scale(1);}
+}
+/* ------------------------------------------------------- */
+.ballup{
+    z-index:90;
+    width:48px;
+    height:48px;
+    position: absolute;
+    background:url(../png/ball-s.png);
+    animation:ballup 4s linear;
+}
+@keyframes ballup{
+    0%{transform:translateX(200px) translateY(400px) scale(10);}
+    33%{transform:translateX(600px) translateY(-100px) scale(1);}
+    100%{transform:translateX(600px) translateY(-100px) scale(1);}
+}

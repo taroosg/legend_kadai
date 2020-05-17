@@ -1,0 +1,76 @@
+
+.wf-nicomoji { font-family: "Nico Moji"; }
+
+.gui{
+    width:100%;
+    margin:0 auto;
+    text-align: center;
+    color: white;
+    /* z-index: 1; */
+}
+
+.contents{
+    position: absolute;
+    bottom:60px;
+    margin:0 auto;
+    width:100%;
+}
+
+h1 {
+    font-size:70px;
+    padding:0 0 0 50px;
+}
+
+#thumbs_up {
+    font-size: 300px;
+    opacity: 0;
+}
+
+.buruburu {
+    display: inline-block;
+    animation: hurueru 0.2s  infinite;
+}
+
+@keyframes hurueru {
+    0% {transform: translate(0px, 0px) rotateZ(0deg)}
+    25% {transform: translate(10px, 10px) rotateZ(1deg)}
+    50% {transform: translate(0px, 10px) rotateZ(0deg)}
+    75% {transform: translate(10px, 0px) rotateZ(-1deg)}
+    100% {transform: translate(0px, 0px) rotateZ(0deg)}
+}
+
+.my-btn-list{
+    padding: 0 0 0 0;
+    height: 100px;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.my-btn-list li{
+    width: 100px;
+    padding:0 35px;
+    /* font-size: 50px; */
+}
+
+i {
+    font-size:100px;
+}
+
+#pc {
+    font-size: 50px;
+}
+
+#cho {
+    transform: rotateZ(-90deg);
+}
+
+.p5Canvas{
+    position: absolute;
+    width: 100%;
+    top:0;
+    left:0;
+    z-index:-1;
+    
+}

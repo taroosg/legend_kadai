@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/main.css">
+    <title>じゃんけん課題</title>
+
+</head>
+
+<body>
+    <div>
+        <h1>じゃんけん課題</h1>
+        <button class="reset">スタート</button>
+        <button class="test2">test</button>
+        <button class="test3">test</button>
+    </div>
+    <div>
+        <div class="main">
+            <div class="sora"></div>
+
+
+
+            <div class="stand">
+                <img src="png/stand.png" alt="">
+                <img src="png/stand.png" alt="">
+                <img src="png/stand.png" alt="">
+                <img src="png/stand.png" alt="">
+                <img src="png/stand.png" alt="">
+                <img src="png/stand.png" alt="">
+                <img src="png/stand.png" alt="">
+                <img src="png/stand.png" alt="">
+            </div>
+
+
+            <div class="ground-base"></div>
+            <div class="ground delete"></div>
+
+            <!-- メイン画面もろもろ ------------------------------------------------->
+            <div class="black delete"></div>
+            <div class="vs delete"></div>
+            <div class="goal_post delete"></div>
+            <div class="goal delete"></div>
+            <div class="sinpan delete"></div>
+            <div class="win delete"></div>
+            <div class="sora_all delete"></div>
+            <div class="ballup delete"></div>
+
+
+
+            <div class="shoot_container delete">
+                <div class="shootanim"></div>
+                <div class="shootanim_ball"></div>
+            </div>
+            <div class="pass_container delete">
+                <div class="passanim"></div>
+                <div class="passanim_ball"></div>
+            </div>
+            <div class="drible_container delete">
+                <div class="dribleanim"></div>
+            </div>
+
+            <div class="trap_container delete">
+                <div class="trapanim"></div>
+                <div class="trapanim_ball"></div>
+            </div>
+
+            <div class="drrible_demo_container delete">
+                <div class="dribledemoanim"></div>
+            </div>
+
+
+            <div class="keeper_goal_container delete">
+                <div class="keeper_goalanim"></div>
+                <div class="keeper_goal_ball"></div>
+            </div>
+
+            <div class="keeper_block_container delete">
+                <div class="keeper_blockanim"></div>
+                <div class="keeper_block_ball"></div>
+            </div>
+
+            <div class="tuckle_container delete">
+                <div class="tuckleanim"></div>
+                <div class="tuckle_ball"></div>
+            </div>
+            <div class="tuckle_block_container delete">
+                <div class="tuckle_blockanim"></div>
+                <div class="tuckle_block_ball"></div>
+            </div>
+
+
+            <div class="block_container delete">
+                <div class="blockanim"></div>
+                <div class="block_ball"></div>
+            </div>
+            <div class="block_block_container delete">
+                <div class="block_blockanim"></div>
+                <div class="block_block_ball"></div>
+            </div>
+
+        </div>
+
+
+        <div class="window-box">
+
+
+            <div class="window-l window">
+                <p>しあいじかん--</p>
+                <p>　ロスタイム</p>
+                <br>
+                <p>スコア--------</p>
+                <p>　ジーズ：０</p>
+                <p>　チーズ：０</p>
+
+            </div>
+
+
+
+
+            <div class="window-r window">
+                <p>どうする？</p>
+                <p class="rock choice">　　・シュート</p>
+                <p class="scissors choice">　　・パス</p>
+                <p class="paper choice">　　・ドリブル</p>
+            </div>
+
+
+
+            <div class="window-wide">
+                aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+
+    <!-- テストスイッチ -->
+    <script>
+        $(function () {
+            ////////////////////////////////////////////////////
+            //スタートデモ
+            /////////////////////////////////////////////////
+            $(".reset").on("click", function () {
+                $(".delete").css("display", "none")
+                $(".window-wide").css("display", "block");
+                $(".ground").css("display", "block");
+                $(".window-wide").html("のこりじかんも　もうない！");
+                $(".drrible_demo_container").css("display", "block");
+                setTimeout(function () {
+                    $(".window-wide").html("これがさいごのチャンスだ！")
+                }, 4000);
+                setTimeout(function () {
+                    $(".delete").css("display", "none")
+                    $(".window-wide").html("ながい　パスを　だす！！！！");
+                    $(".pass_container").css("display", "block");
+                }, 8000);
+                setTimeout(function () {
+                    $(".delete").css("display", "none")
+                    $(".window-wide").html("うまく　とおった！");
+                    $(".trap_container").css("display", "block");
+                }, 12000);
+                setTimeout(function () {
+                    $(".delete").css("display", "none")
+                    $(".window-wide").html("シュートも　ねらえる　いちだ！");
+                    $(".drrible_demo_container").css("display", "block");
+                    $(".ground").css("display", "block");
+                }, 16000);
+                setTimeout(function () {
+                    $(".delete").css("display", "none")
+                    $(".window-wide").html("てきに　かこまれた！");
+                    $(".vs").css("display", "block");
+                }, 20000);
+                setTimeout(function () {
+                    $(".window-wide").css("display", "none");
+                }, 21000);
+            })
+
+            // //////////////////////////////////////
+            //じゃんけん開始
+            ///////////////////////////////////////
+
+            var mychoice;
+            // var comchoice;
+            var winlosesum;
+            const arr = ["グー", "チョキ", "パー"]
+            var num = Math.floor(Math.random() * 2);
+            // var num = 0;
+            console.log("相手は" + arr[num])
+            var result;
+
+
+            $(".rock").on("click", function () {
+                mychoice = 0
+            })
+            $(".scissors").on("click", function () {
+                mychoice = 1
+            })
+            $(".paper").on("click", function () {
+                mychoice = 2
+            })
+
+            $(".choice").on("click", function () {
+                winlosesum = (mychoice - num + 3) % 3;
+                console.log(winlosesum)
+                if (winlosesum == 0) {/////////////////////////////////////////////////////////////////////////////////ok
+                    console.log("引き分け")
+                    if (mychoice == 0) {
+                        $(".delete").css("display", "none")
+                        $(".window-wide").css("display", "block");
+                        $(".window-wide").html("あいてのスキをついてシュート！");
+                        $(".ground").css("display", "block");
+                        $(".shoot_container").css("display", "block");
+                        setTimeout(function () {
+                            $(".delete").css("display", "none")
+                            $(".keeper_block_container").css("display", "block")
+                            $(".goal_post").css("display", "block")
+                            $(".window-wide").html("いけええええええ！！！！")
+                        }, 4000);
+                        setTimeout(function () {
+                            $(".window-wide").html("はじいた！！！！")
+                        }, 5000);
+                        setTimeout(function () {
+                            $(".delete").css("display", "none")
+                            $(".ballup").css("display", "block")
+                            $(".sora_all").css("display", "block")
+                            $(".window-wide").html("こぼれだまに　なった！！！！")
+                        }, 8000);
+                        setTimeout(function () {
+                            $(".delete").css("display", "none")
+                            $(".trap_container").css("display", "block")
+                            $(".window-wide").html("<p>みかたが　ボールを　キャッチ！！！！</p><p>まだチャンスは　つづいている！</p>")
+                        }, 11000);
+                        setTimeout(function () {
+                            num = Math.floor(Math.random() * 2);
+                            console.log("相手は" + arr[num])
+                            $(".delete").css("display", "none")
+                            $(".vs").css("display", "block")
+                            $(".window-wide").css("display", "none")
+                        }, 14000);
+
+                    } else if (mychoice == 1) {
+                        $(".delete").css("display", "none")
+                        $(".window-wide").css("display", "block");
+                        $(".window-wide").html("パス！");
+                        $(".ground").css("display", "block");
+                        $(".pass_container").css("display", "block");
+                        setTimeout(function () {
+                            $(".delete").css("display", "none")
+                            $(".keeper_block_container").css("display", "block")
+                            $(".goal_post").css("display", "block")
+                            $(".window-wide").html("キーパーが　とびだしてきた！！！！")
+                        }, 4000);
+                        setTimeout(function () {
+                            $(".window-wide").html("はじいた！！！！")
+                        }, 5000);
+                        setTimeout(function () {
+                            $(".delete").css("display", "none")
+                            $(".ballup").css("display", "block")
+                            $(".sora_all").css("display", "block")
+                            $(".window-wide").html("こぼれだまに　なった！！！！")
+                        }, 8000);
+                        setTimeout(function () {
+                            $(".delete").css("display", "none")
+                            $(".trap_container").css("display", "block")
+                            $(".window-wide").html("<p>みかたが　ボールを　キャッチ！！！！</p><p>まだチャンスは　つづいている！</p>")
+                        }, 11000);
+                        setTimeout(function () {
+                            num = Math.floor(Math.random() * 2);
+                            console.log("相手は" + arr[num])
+                            $(".delete").css("display", "none")
+                            $(".vs").css("display", "block")
+                            $(".window-wide").css("display", "none")
+                        }, 14000);
+                    } else {/////////////////////////////////////////////////////////////////////////////
+                        $(".delete").css("display", "none")
+                        $(".window-wide").css("display", "block");
+                        $(".window-wide").html("ごういんなドリブル！");
+                        $(".ground").css("display", "block");
+                        $(".drible_container").css("display", "block");
+                        setTimeout(function () {
+                            $(".delete").css("display", "none")
+                            $(".tuckle_block_container").css("display", "block")
+                            $(".ground").css("display", "block")
+                            $(".window-wide").html("てきの　タックル！！！！")
+                        }, 4000);
+                        setTimeout(function () {
+                            $(".window-wide").html("はじいた！！！！")
+                        }, 5000);
+                        setTimeout(function () {
+                            $(".delete").css("display", "none")
+                            $(".ballup").css("display", "block")
+                            $(".sora_all").css("display", "block")
+                            $(".window-wide").html("こぼれだまに　なった！！！！")
+                        }, 8000);
+                        setTimeout(function () {
+                            $(".delete").css("display", "none")
+                            $(".trap_container").css("display", "block")
+                            $(".window-wide").html("<p>みかたが　ボールを　キャッチ！！！！</p><p>まだチャンスは　つづいている！</p>")
+                        }, 11000);
+                        setTimeout(function () {
+                            num = Math.floor(Math.random() * 2);
+                            console.log("相手は" + arr[num])
+                            $(".delete").css("display", "none")
+                            $(".vs").css("display", "block")
+                            $(".window-wide").css("display", "none")
+                        }, 14000);
+                    }
+
+                } else if (winlosesum == 1) {//////////////////////////////////////////////////////////////////////////ok
+                    console.log("あなたの負け")
+                    if (mychoice == 0) {
+                        $(".delete").css("display", "none")
+                        $(".window-wide").css("display", "block");
+                        $(".window-wide").html("あいてのスキをついてシュート！");
+                        $(".ground").css("display", "block");
+                        $(".shoot_container").css("display", "block");
+                        setTimeout(function () {
+                            $(".delete").css("display", "none")
+                            $(".keeper_block_container").css("display", "block")
+                            $(".goal_post").css("display", "block")
+                            $(".window-wide").html("いけええええええ！！！！")
+                        }, 4000);
+                        setTimeout(function () {
+                            $(".window-wide").html("はじいた！！！！")
+                        }, 5000);
+                        setTimeout(function () {
+                            $(".delete").css("display", "none")
+                            $(".ballup").css("display", "block")
+                            $(".sora_all").css("display", "block")
+                            $(".window-wide").html("こぼれだまに　なった！！！！")
+                        }, 8000);
+                        setTimeout(function () {
+                            $(".delete").css("display", "none")
+                            $(".block_block_container").css("display", "block")
+                            $(".sora_all").css("display", "block")
+                            $(".window-wide").html("てきが　ボールを　キャッチ！！！！")
+                        }, 11000);
+                        setTimeout(function () {
+                            $(".delete").css("display", "none")
+                            $(".sinpan").css("display", "block")
+                            $(".black").css("display", "block")
+                            $(".window-wide").html("<p>ここで　しあいしゅうりょう！！！！</p><p>こんかいは　ひきわけだ…</p>")
+                        }, 14000);
+                    } else if (mychoice == 1) {////////////////////////////////////////////////////////////////////////////ok
+                        $(".delete").css("display", "none")
+                        $(".window-wide").css("display", "block");
+                        $(".window-wide").html("パス！");
+                        $(".ground").css("display", "block");
+                        $(".pass_container").css("display", "block");
+                        setTimeout(function () {
+                            $(".delete").css("display", "none")
+                            $(".block_block_container").css("display", "block")
+                            $(".sora_all").css("display", "block")
+                            $(".window-wide").html("てきが　ボールに　むかう！！！！")
+                        }, 4000);
+                        setTimeout(function () {
+                            $(".window-wide").html("とられた！！！！")
+                        }, 5000);
+                        setTimeout(function () {
+                            $(".delete").css("display", "none")
+                            $(".sinpan").css("display", "block")
+                            $(".black").css("display", "block")
+                            $(".window-wide").html("<p>ここで　しあいしゅうりょう！！！！</p><p>こんかいは　ひきわけだ…</p>")
+                        }, 8000);
+                    } else {////////////////////////////////////////////////////////////////////////////////ok
+                        $(".delete").css("display", "none")
+                        $(".window-wide").css("display", "block");
+                        $(".window-wide").html("ごういんなドリブル！");
+                        $(".ground").css("display", "block");
+                        $(".drible_container").css("display", "block");
+                        setTimeout(function () {
+                            $(".delete").css("display", "none")
+                            $(".tuckle_block_container").css("display", "block")
+                            $(".ground").css("display", "block")
+                            $(".window-wide").html("てきの　タックル！！！！")
+                        }, 4000);
+                        setTimeout(function () {
+                            $(".window-wide").html("はじいた！！！！")
+                        }, 5000);
+                        setTimeout(function () {
+                            $(".delete").css("display", "none")
+                            $(".ballup").css("display", "block")
+                            $(".sora_all").css("display", "block")
+                            $(".window-wide").html("こぼれだまに　なった！！！！")
+                        }, 8000);
+                        setTimeout(function () {
+                            $(".delete").css("display", "none")
+                            $(".block_block_container").css("display", "block")
+                            $(".sora_all").css("display", "block")
+                            $(".window-wide").html("てきが　ボールを　キャッチ！！！！")
+                        }, 11000);
+                        setTimeout(function () {
+                            $(".delete").css("display", "none")
+                            $(".sinpan").css("display", "block")
+                            $(".black").css("display", "block")
+                            $(".window-wide").html("<p>ここで　しあいしゅうりょう！！！！</p><p>こんかいは　ひきわけだ…</p>")
+                        }, 14000);
+                    }
+
+                } else {
+                    console.log("あなたの勝ち")
+                    if (mychoice == 0) {/////////////////////////////////////////////////////////////////////////ok
+                        $(".delete").css("display", "none")
+                        $(".window-wide").css("display", "block");
+                        $(".window-wide").html("あいてのスキをついてシュート！");
+                        $(".ground").css("display", "block");
+                        $(".shoot_container").css("display", "block");
+                        setTimeout(function () {
+                            $(".delete").css("display", "none")
+                            $(".keeper_goal_container").css("display", "block")
+                            $(".goal_post").css("display", "block")
+                            $(".window-wide").html("いけええええええ！！！！")
+                        }, 4000);
+                        setTimeout(function () {
+                            $(".delete").css("display", "none");
+                            $(".black").css("display", "block")
+                            $(".goal").css("display", "block")
+                            $(".window-wide").html("きまった！　ゴール！！")
+                        }, 6000);
+                        setTimeout(function () {
+                            $(".delete").css("display", "none");
+                            $(".black").css("display", "block")
+                            $(".win").css("display", "block")
+                            $(".window-wide").html("<p>どうじに　しあいしゅうりょう！</p><p>おめでとう　あなたの　かちです！</p>")
+                        }, 8000);
+                    } else if (mychoice == 1) {////////////////////////////////////////////////////////////////////ok
+                        $(".delete").css("display", "none")
+                        $(".window-wide").css("display", "block");
+                        $(".window-wide").html("パス！");
+                        $(".ground").css("display", "block");
+                        $(".pass_container").css("display", "block");
+                        setTimeout(function () {
+                            $(".delete").css("display", "none")
+                            $(".block_container").css("display", "block")
+                            $(".sora_all").css("display", "block")
+                            $(".window-wide").html("てきの　ブロック！！！！")
+                        }, 4000);
+                        setTimeout(function () {
+                            $(".window-wide").html("だが　とどかない！！！！")
+                        }, 6000);
+                        setTimeout(function () {
+                            $(".delete").css("display", "none")
+                            $(".trap_container").css("display", "block")
+                            $(".window-wide").html("パスが　とおる！！！！")
+                        }, 9000);
+                        setTimeout(function () {
+                            $(".delete").css("display", "none")
+                            $(".shoot_container").css("display", "block")
+                            $(".ground").css("display", "block")
+                            $(".window-wide").html("<p>あいての　キーパーは</p><p>バランスを　くずしている！！！！<p>")
+                        }, 13000);
+                        setTimeout(function () {
+                            $(".window-wide").html("シュート！！！！")
+                        }, 15000);
+                        setTimeout(function () {
+                            $(".delete").css("display", "none")
+                            $(".keeper_goal_container").css("display", "block")
+                            $(".goal_post").css("display", "block")
+                            $(".window-wide").html("いけええええええ！！！！")
+                        }, 17000);
+                        setTimeout(function () {
+                            $(".delete").css("display", "none");
+                            $(".black").css("display", "block")
+                            $(".goal").css("display", "block")
+                            $(".window-wide").html("きまった！　ゴール！！")
+                        }, 19000);
+                        setTimeout(function () {
+                            $(".delete").css("display", "none");
+                            $(".black").css("display", "block")
+                            $(".win").css("display", "block")
+                            $(".window-wide").html("<p>どうじに　しあいしゅうりょう！</p><p>おめでとう　あなたの　かちです！</p>")
+                        }, 21000);
+                    } else {///////////////////////////////////////////////////////////////////////////////////////////////ok
+                        $(".delete").css("display", "none")
+                        $(".window-wide").css("display", "block")
+                        $(".tuckle_container").css("display", "block");
+                        $(".window-wide").html("てきのタックル！");
+                        $(".ground").css("display", "block");
+                        setTimeout(function () {
+                            $(".delete").css("display", "none")
+                            $(".drible_container").css("display", "block")
+                            $(".ground").css("display", "block")
+                            $(".window-wide").html("かれいに　かわす！！！！")
+                        }, 3000);
+                        setTimeout(function () {
+                            $(".delete").css("display", "none")
+                            $(".shoot_container").css("display", "block")
+                            $(".ground").css("display", "block")
+                            $(".window-wide").html("<p>あいての　キーパーは</p><p>バランスを　くずしている！！！！<p>")
+                        }, 7000);
+                        setTimeout(function () {
+                            $(".window-wide").html("シュート！！！！")
+                        }, 9000);
+                        setTimeout(function () {
+                            $(".delete").css("display", "none")
+                            $(".keeper_goal_container").css("display", "block")
+                            $(".goal_post").css("display", "block")
+                            $(".window-wide").html("いけええええええ！！！！")
+                        }, 11000);
+                        setTimeout(function () {
+                            $(".delete").css("display", "none");
+                            $(".black").css("display", "block")
+                            $(".goal").css("display", "block")
+                            $(".window-wide").html("きまった！　ゴール！！")
+                        }, 13000);
+                        setTimeout(function () {
+                            $(".delete").css("display", "none");
+                            $(".black").css("display", "block")
+                            $(".win").css("display", "block")
+                            $(".window-wide").html("<p>どうじに　しあいしゅうりょう！</p><p>おめでとう　あなたの　かちです！</p>")
+                        }, 15000);
+                    }
+                }
+
+            })
+
+
+
+
+            ///////////////////////////////
+            /////////////////////////////////
+            ///////////////////////////////////
+
+
+            $(".test2").on("click", function () {
+                $(".window-wide").toggle()
+            })
+
+            $(".test3").on("click", function () {
+                setTimeout(function () {
+                    $(".black").toggle();
+                }, 1000);
+            })
+            $(".test3").on("click", function () {
+                setTimeout(function () {
+                    $(".black").toggle();
+                }, 2000);
+            })
+            $(".test3").on("click", function () {
+                setTimeout(function () {
+                    $(".window-wide").css("display", "block");
+                    $(".window-wide").html("どうする！");
+                }, 3000);
+            })
+            $(".test3").on("click", function () {
+                setTimeout(function () {
+                    $(".window-wide").html("きええええええええ");
+                }, 4000);
+            })
+
+        })
+
+    </script>
+
+
+
+
+</body>
+
+</html>

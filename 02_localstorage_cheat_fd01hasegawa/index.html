@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>チーズエディター</title>
+  <meta name="description" content=“チーズアカデミーの課題を秒速で終わらせるためのツールです”>
+  <meta property="og:title" content="チーズエディター">
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="#" />
+  <meta property="og:site_name" content="チーズエディター" />
+  <meta property="og:description" content="チーズエディター" />
+  <meta name="format-detection" content="telephone=no">
+  <link rel="canonical" href="#">
+  <link rel="stylesheet" type="text/css" href="css/reset.css" />
+  <link rel="stylesheet" type="text/css" href="css/sanitize.css" />
+  <link rel="stylesheet" type="text/css" href="css/cheese_editor.css" />
+</head>
+
+<!-- - - - - - - - - - - - - - - - - - - - - -->
+
+<body>
+  <!-- メイン画面 -->
+  <div id="main_wrap">
+    <!-- main_display の中に div_sortable_wrap がjsから挿入されます -->
+    <div id="main_display"></div>
+  </div>
+
+  <!-- code_display  -->
+  <div id="code_display">
+    <!-- 開閉ボタン -->
+    <div id="code_display_button"></div>
+    <!-- コード記述欄 -->
+    <div id="code_wrap">
+      <div id="code_html">
+        <textarea class="textarea_html code_area"></textarea>
+        <div class="dl_html dl_rabel">
+          <a>DOWNLOAD HTML</a>
+        </div>
+      </div>
+      <div id="code_css">
+        <textarea class="textarea_css code_area"></textarea>
+        <div class="dl_css dl_rabel">
+          <a>DOWNLOAD CSS</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- コントローラー -->
+  <div id="controller">
+    <div class="cnt cnt_top"></div>
+    <div class="cnt cnt_navi"></div>
+    <div class="cnt cnt_text"></div>
+    <div class="cnt cnt_photo"></div>
+    <div class="cnt cnt_course"></div>
+    <div class="cnt cnt_news"></div>
+    <div class="cnt cnt_map"></div>
+    <div class="cnt cnt_info"></div>
+    <div class="cnt cnt_form"></div>
+    <div class="cnt cnt_footer"></div>
+  </div>
+
+  <!-- save load clear -->
+  <div id="menu_button">
+    <!-- SAVE -->
+    <div class="save_button sr_button">
+      <div class="save_label sr_label">
+        <a>SAVE</a>
+      </div>
+
+      <div class="save_list_wrap sr_wrap_hide">
+        <ul>
+          <li class="save_number1">
+            <a href="#">no data</a>
+          </li>
+          <li class="save_number2">
+            <a href="#">no data</a>
+          </li>
+          <li class="save_number3">
+            <a href="#">no data</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- LORD -->
+    <div class="load_button sr_button">
+      <div class="load_label sr_label">
+        <a>LORD</a>
+      </div>
+
+      <div class="load_list_wrap sr_wrap_hide">
+        <ul>
+          <li class="load_number1">
+            <a href="#">no data</a>
+          </li>
+          <li class="load_number2">
+            <a href="#">no data</a>
+          </li>
+          <li class="load_number3">
+            <a href="#">no data</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- CLEAR -->
+    <div class="clear_button sr_button">
+      <div class="clear_label sr_label">
+        <a>CLEAR</a>
+      </div>
+
+      <div class="clear_list_wrap sr_wrap_hide">
+        <ul>
+          <li class="clear_maindisplay">
+            <a href="#">編集画面</a>
+            <li class="clear_number1">
+              <a href="#">no data</a>
+            </li>
+            <li class="clear_number2">
+              <a href="#">no data</a>
+            </li>
+            <li class="clear_number3">
+              <a href="#">no data</a>
+            </li>
+            <li class="clear_all">
+              <a href="#">all data</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ゴミ箱 -->
+  <div id="trash_can"></div>
+
+  <!-- ダミー -->
+  <div id="dummy"></div>
+
+  <!-- footer -->
+  <div id="footer">
+    <p>#hanatoletter #ryo_hasegawa</p>
+  </div>
+
+
+  <!-- - - - - - - - - - - - - - - - - - - - - -->
+  <!--  エディターのためにあえてHTMLにstyleを記述 -->
+  <!--  cssの中身はjsの中に記載してあります -->
+  <!-- - - - - - - - - - - - - - - - - - - - - -->
+  <style>
+  </style>
+
+
+  <!-- - - - - - - - - - - - - - - - - - - - - -->
+  <!-- script -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="js/Sortable.js"></script>
+  <script src="js/cheese_editor.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SWOTシート</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="css/sanitize.css" />
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/sunny/jquery-ui.css">
+</head>
+
+<body>
+    <div class="flexOut">
+        <div class="option">
+            <div id="new">新しい付箋を作る</div>
+            <select id="color">
+                <option value="#ffc">黄色</option>
+                <option value="#fcc">赤色</option>
+                <option value="#cfc">緑色</option>
+            </select>
+            <div id="del">選択した付箋を消す</div>
+            <div id="clear">全ての付箋を消す</div>
+        </div>
+        <div class='title'>
+            <div class="flex">
+                <div id="head">SWOT分析シート</div>
+                <form id="head2out">
+                    <input type="text" name="NAME" id="head2" placeholder="テーマ">
+                </form>
+                <div class="space"></div>
+            </div>
+        </div>
+        <div class="main_area">
+            <div class="row1">
+                <div class="row1_line1"></div>
+                <div class="row1_line2">プラス面</div>
+                <div class="row1_line3">マイナス面</div>
+
+            </div>
+            <div class="row2">
+                <div class="row2_line1">内部環境</div>
+                <div class="row2_line2">
+                    <span class="moji">S</span>trongth(強み)
+                </div>
+                <div class="row2_line3">
+                    <span class="moji">W</span>eakness(弱み)</div>
+            </div>
+            <div class="row3">
+                <div class="row3_line1">外部環境</div>
+                <div class="row3_line2">
+                    <span class="moji">O</span>pporunity(機会)</div>
+                <div class="row3_line3">
+                    <span class="moji">T</span>heat(脅威)</div>
+            </div>
+
+
+        </div>
+
+    </div>
+
+    <script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.12.0/jquery-ui.min.js"></script>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+    <script src="js/main.js"></script>
+</body>
+
+
+</html>

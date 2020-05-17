@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/sample.css">
+    <title>じゃんけん</title>
+</head>
+
+<body>
+    <header>
+        <h1>じゃんけんクエスト</h1>
+    </header>
+    <div id="status">
+        <div class="box">
+            <div id="name">
+                <div class="name">あなた</div>
+                <ul>
+                    <li id="hp">H&nbsp;50</li>
+                    <li id="mp">M&nbsp;20</li>
+                    <li id="lv">LV&nbsp;5</li>
+                </ul>
+            </div>
+        </div>
+        <div class="box">
+            <div class=name=>まほうつかい</div>
+            <ul>
+                <li id="mhp">H&nbsp;30</li>
+                <li id="mmp">M&nbsp;50</li>
+                <li id="mlv">LV&nbsp;5</li>
+            </ul>
+        </div>
+        <div class="box">
+            <div class=>あそびにん</div>
+            <ul>
+                <li id="ahp">H&nbsp;20</li>
+                <li id="amp">M&nbsp;10</li>
+                <li id="alv">LV&nbsp;5</li>
+            </ul>
+        </div>
+        <div class="enemybox">
+            <div id="enemy">
+                <div class=>てき</div>
+                <ul>
+                    <li id="ehp">H&nbsp;??</li>
+                    <li>M&nbsp;??</li>
+                    <li>LV&nbsp;??</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <main id="main">
+        <div class=img><img src="./デスピサロ.png" alt="">
+        </div>
+        <div id="rivive1">
+            <div id="rivive_magic">
+                <p>ふっかつのじゅもん</p>
+            </div>
+            <div class=passcode>
+                <div class=passbox>
+                    <div id=passbox1></div>
+                </div>
+                <div class=passbox>
+                    <div id=passbox2></div>
+                </div>
+                <div class=passbox>
+                    <div id=passbox3></div>
+                </div>
+                <div class=passbox>
+                    <div id=passbox4></div>
+                </div>
+                <div class=passbox>
+                    <div id=passbox5></div>
+                </div>
+                <div class=passbox>
+                    <div id=passbox6></div>
+                </div>
+                <div class=passbox>
+                    <div id=passbox7></div>
+                </div>
+                <div class=passbox>
+                    <div id=passbox8></div>
+                </div>
+                <div class=passbox>
+                    <div id=passbox9></div>
+                </div>
+            </div>
+            <div id="rivive">
+                <li class=gojuon1>あ</li>
+                <li class=gojuon1>い</li>
+                <li class=gojuon1>う</li>
+                <li class=gojuon1>え</li>
+                <li class=gojuon1>お</li>
+                <li class=gojuon1>か</li>
+                <li class=gojuon1>き</li>
+                <li class=gojuon1>く</li>
+                <li class=gojuon1>け</li>
+                <li class=gojuon1>こ</li>
+                <li class=gojuon1>さ</li>
+                <li class=gojuon1>し</li>
+                <li class=gojuon1>す</li>
+                <li class=gojuon1>せ</li>
+                <li class=gojuon1>そ</li>
+                <li class=gojuon1>た</li>
+                <li class=gojuon1>ち</li>
+                <li class=gojuon1>つ</li>
+                <li class=gojuon1>て</li>
+                <li class=gojuon1>と</li>
+                <li class=gojuon1>な</li>
+                <li class=gojuon1>に</li>
+                <li class=gojuon1>ぬ</li>
+                <li class=gojuon1>ね</li>
+                <li class=gojuon1>の</li>
+                <li class=gojuon1>は</li>
+                <li class=gojuon1>ひ</li>
+                <li class=gojuon1>ふ</li>
+                <li class=gojuon1>へ</li>
+                <li class=gojuon1>ほ</li>
+                <li class=gojuon1>ま</li>
+                <li class=gojuon1>み</li>
+                <li class=gojuon1>む</li>
+                <li class=gojuon1>め</li>
+                <li class=gojuon1>も</li>
+                <li class=gojuon1>や</li>
+                <li class=gojuon1>ゆ</li>
+                <li class=gojuon1>よ</li>
+                <li class=gojuon1>ら</li>
+                <li class=gojuon1>り</li>
+                <li class=gojuon1>る</li>
+                <li class=gojuon1>れ</li>
+                <li class=gojuon1>ろ</li>
+                <li class=gojuon1>わ</li>
+                <li class=gojuon1>を</li>
+                <li class=gojuon1>ん</li>
+                <li class=gojuon1>”</li>
+                <li class=gojuon1>ー</li>
+            </div>
+        </div>
+        <div id="select1">
+            <ul>
+                <li id="battle">たたかう</li>
+                <li id="magic">まほう</li>
+                <li id="play">あそぶ</li>
+                <li id="escape">にげる</li>
+            </ul>
+        </div>
+        <div id="select2">
+            <ul>
+                <li id="gu_btn">グー</li>
+                <li id="cho_btn">チョキ</li>
+                <li id="par_btn">パー</li>
+                <li id="return">もどる</li>
+            </ul>
+        </div>
+        <div id="select3">
+            <ul>
+                <li id="io_btn">イオ</li>
+                <li id="mera_btn">メラ</li>
+                <li id="bye_btn">バイキルト</li>
+                <li id="pa">パルプンテ</li>
+            </ul>
+        </div>
+    </main>
+    <div class="textboard">
+        <div class="text">
+            <div id="com_hand"></div>
+            <div id="judgment"></div>
+        </div>
+        <div id="next"></div>
+    </div>
+    <footer></footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="jquery.flicker.js"></script>
+    <script>
+        $(function () {
+            let hp = 100;
+            let ehp = 500;
+            let gojuon = ["あ", "い", "う", "え", "お", "か", "き", "く", "け", "こ", "さ", "し", "す", "せ", "そ", "た", "ち", "つ", "て", "と", "な", "に", "ぬ", "ね", "の", "は", "ひ", "ふ", "へ", "ほ", "ま", "み", "む", "め", "も", "や", "ゆ", "よ", "ら", "り", "る", "れ", "ろ", "わ", "を", "ん", "”", "-"]
+            let t = -1;
+            let a, b, c, d, e, f, g, h, j = 0;
+            let z = 1;
+            // $("#rivive_magic").show(0);
+            // $("#rivive_magic").on("click", function () {
+            //     for (var i = 1; i <= 20; i++) {
+            //         t = t + 1;
+            //         let elem = "<li class=gojuon1 id='gojuon'>" + gojuon[t] + "</li>";
+            //         $("#rivive").append(elem);
+            //     }
+            // })
+            $("#hp").text("H" + " " + hp)
+            $("img").hide(0);
+            $("#rivive1").hide(0);
+            $("#rivive li").click(function () {
+                var rivive = [$("#passbox1"), $("#passbox2"), $("#passbox3"), $("#passbox4"), $("#passbox5"), $("#passbox6"), $("#passbox7"), $("#passbox8"), $("#passbox9")];
+                var i = $(this).index();
+                if (rivive[0].width() == 0) {
+                    $("#passbox1").text(gojuon[i]);
+                    a = String(i);
+                } else if (rivive[1].width() == 0) {
+                    $("#passbox2").text(gojuon[i]);
+                    b = String(i);
+                } else if (rivive[2].width() == 0) {
+                    $("#passbox3").text(gojuon[i]);
+                    c = String(i);
+                } else if (rivive[3].width() == 0) {
+                    $("#passbox4").text(gojuon[i]);
+                    d = String(i);
+                } else if (rivive[4].width() == 0) {
+                    $("#passbox5").text(gojuon[i]);
+                    e = String(i);
+                } else if (rivive[5].width() == 0) {
+                    $("#passbox6").text(gojuon[i]);
+                    f = String(i);
+                } else if (rivive[6].width() == 0) {
+                    $("#passbox7").text(gojuon[i]);
+                    g = String(i);
+                } else if (rivive[7].width() == 0) {
+                    $("#passbox8").text(gojuon[i]);
+                    h = String(i);
+                } else if (rivive[8].width() == 0) {
+                    $("#passbox9").text(gojuon[i]);
+                    j = String(i);
+                }
+            });
+            $("#rivive_magic").on("click", function () {
+                var result = a + b + c + d + e + f + g + h + j;
+                console.log(result);
+                if (result == "114647124627745") {
+                    console.log(result);
+                    hp = 999;
+                    mera = "メラゾーマ";
+                    io = "イオナズン";
+                    $("#rivive1").hide(0);
+                    $("#mera_btn").text(mera);
+                    $("#io_btn").text(io);
+                    $("#com_hand").text("");
+                    $("#judgment").text("");
+                    setTimeout(function () {
+                        $('body').flicker({
+                            'reps': 3,
+                            'pause': 100,
+                            'delay': 200,
+                            'color': '#FFF',
+                        });
+                        $("#com_hand").text("ふっかつのじゅもん！！");
+                    }, 500);
+                    setTimeout(function () {
+                        $("#hp").text("H" + " " + "999");
+                        $("#name").css("color", "white");
+                        $("#name ul").css("border-color", "black");
+                    }, 2500);
+                    setTimeout(function () {
+                        $("#mp").text("M" + " " + "999");
+                    }, 3000);
+                    setTimeout(function () {
+                        $("#lv").text("LV" + " " + "99");
+                    }, 3500);
+                    setTimeout(function () {
+                        $("#mhp").text("H" + " " + "999");
+                    }, 4000);
+                    setTimeout(function () {
+                        $("#mmp").text("M" + " " + "999");
+                    }, 4500);
+                    setTimeout(function () {
+                        $("#mlv").text("LV" + " " + "99");
+                    }, 5000);
+                    setTimeout(function () {
+                        $("#ahp").text("H" + " " + "999");
+                    }, 5500);
+                    setTimeout(function () {
+                        $("#amp").text("M" + " " + "999");
+                    }, 6000);
+                    setTimeout(function () {
+                        $("#alv").text("LV" + " " + "99");
+                        $("#next").show(0);
+                    }, 6500);
+                    setTimeout(function () {
+                        $("#com_hand").text("なんとふっかつした！");
+                    }, 1500);
+                    setTimeout(function () {
+                        $("#judgment").text("みるみるうちにちからがわいてきた！");
+                    }, 2000);
+                    z = 10;
+                } else {
+                    a, b, c, d, e, f, g, h, j = 0;
+                    $("#passbox1").text("");
+                    $("#passbox2").text("");
+                    $("#passbox3").text("");
+                    $("#passbox4").text("");
+                    $("#passbox5").text("");
+                    $("#passbox6").text("");
+                    $("#passbox7").text("");
+                    $("#passbox8").text("");
+                    $("#passbox9").text("");
+                }
+            })
+            $("#gojuon").on("click", function () {
+                $("#name").css("color", "red");
+            })
+            // $("#ehp").text("H" + " " + ehp)
+            var r = 0;
+            $("#next").on("click", function () {
+                r = r + 1;
+                console.log(r);
+                $("#com_hand").text("");
+                $("#judgment").text("");
+                if (r % 2 == 1) {
+                    $("#next").hide(0);
+                    if (hp <= 0) {
+                        $("#com_hand").text("てきにたおされてしまった…");
+                        $("#judgment").text("");
+                        setTimeout(function () {
+                            $("#rivive1").show(0);
+                        }, 2000);
+                    } else if (r == 1) {
+                        $("img").show(0);
+                        $("#com_hand").text("てきがあらわれた！");
+                        setTimeout(function () {
+                            $("#judgment").text("あなたのターン！コマンドをえらんで！");
+                        }, 500);
+                        $("#select1").css("opacity", "1");
+                        $("#select2").css("opacity", "1");
+                        $("#select1").show(0);
+                        $("#select2").show(0);
+                    } else {
+                        $("#judgment").text("");
+                        $("#com_hand").text("あなたのターン！");
+                        setTimeout(function () {
+                            $("#judgment").text("コマンドをえらんで！");
+                        }, 500);
+                        $("#select1").css("opacity", "1");
+                        $("#select2").css("opacity", "1");
+                        $("#select1").show(0);
+                        $("#select2").show(0);
+                    }
+                } else {
+                    setTimeout(function () {
+                        if (ehp <= 0) {
+                            $("img").hide(0);
+                            $("#com_hand").text("てきをたおした!");
+                            $("#judgment").text("");
+                            $("#enemy").css("color", "rgb(160,9,9)");
+                            $("#enemy ul").css("border-color", "red");
+                            $("#next").hide(0);
+                            setTimeout(function () {
+                                $("#com_hand").text("ぶじせかいにへいわがおとずれた");
+                            }, 1500);
+
+                        } else {
+                            let edamage = Math.floor(Math.random() * 20 + 40);
+                            $("#com_hand").text("てきのターン");
+                            setTimeout(function () {
+                                $("#judgment").text("てきのこうげき！" + " " + edamage + "のダメージ！");
+                                hp = hp - edamage;
+                                $("#next").show(0);
+                                if (hp <= 0) {
+                                    $("#hp").text("H" + " " + 0);
+                                    $("#name").css("color", "rgb(160,9,9)");
+                                    $("#name ul").css("border-color", "red");
+                                } else if (hp <= 10) {
+                                    $("#name").css("color", "yellow");
+                                    $("#hp").text("H" + " " + hp);
+                                }
+                                else {
+                                    $("#hp").text("H" + " " + hp);
+                                }
+
+                            }, 500)
+
+                        }
+                    }, 100);
+
+                }
+            })
+            $("#battle").on("click", function () {
+                $("#select1").hide(0);
+                $("#select3").hide(0);
+            })
+            $("#magic").on("click", function () {
+                $("#select3").show(0);
+                $("#select3").css("opacity", "1");
+            })
+            $("#io_btn").on("click", function () {
+                var magicdamage = Math.floor(Math.random() * 10 + 20);
+                ehp = ehp - magicdamage;
+                io = "イオ"
+                $("#hp").text("H" + " " + hp);
+                $("#select1").hide(0);
+                $("#select2").hide(0);
+                $("#select3").hide(0);
+                $("#com_hand").text(io + "のまほうをとなえた");
+                $("#judgment").text(magicdamage + "のダメージ");
+                $("#next").show(0);
+                $('img').flicker({
+                    'reps': 5,
+                    'pause': 100,
+                    'delay': 200,
+                    'color': '#FFF',
+                });
+            });
+
+            $("#mera_btn").on("click", function () {
+                var magicdamage = Math.floor(Math.random() * 10 + 20);
+                ehp = ehp - magicdamage;
+                mera = "メラ"
+                $("#hp").text("H" + " " + hp);
+                $("#select1").hide(0);
+                $("#select2").hide(0);
+                $("#select3").hide(0);
+                $("#com_hand").text(mera + "のまほうをとなえた");
+                $("#judgment").text(magicdamage + "のダメージ");
+                $("#next").show(0);
+                $('img').flicker({
+                    'reps': 5,
+                    'pause': 100,
+                    'delay': 200,
+                    'color': '#FFF',
+                });
+            });
+
+
+            $("#pa").on("click", function () {
+                hp = 999;
+                $("#rivive1").hide(0);
+                $("#mera_btn").text("メラゾーマ");
+                $("#io_btn").text("イオナズン");
+                setTimeout(function () {
+                    $("#hp").text("H" + " " + "999");
+                }, 1500);
+                setTimeout(function () {
+                    $("#mp").text("M" + " " + "999");
+                }, 2000);
+                setTimeout(function () {
+                    $("#lv").text("LV" + " " + "99");
+                }, 2500);
+                setTimeout(function () {
+                    $("#mhp").text("H" + " " + "999");
+                }, 3000);
+                setTimeout(function () {
+                    $("#mmp").text("M" + " " + "999");
+                }, 3500);
+                setTimeout(function () {
+                    $("#mlv").text("LV" + " " + "99");
+                }, 4000);
+                setTimeout(function () {
+                    $("#ahp").text("H" + " " + "999");
+                }, 4500);
+                setTimeout(function () {
+                    $("#amp").text("M" + " " + "999");
+                }, 5000);
+                setTimeout(function () {
+                    $("#alv").text("LV" + " " + "99");
+                    $("#next").show(0);
+                }, 5500);
+                setTimeout(function () {
+                    $("#com_hand").text("なんとふっかつした！");
+                }, 500);
+                setTimeout(function () {
+                    $("#judgment").text("みるみるうちにちからがわいてきた！");
+                }, 1000);
+                z = 10;
+            });
+            $("#bye_btn").on("click", function () {
+                z = z * 2;
+                $("#select1").hide(0);
+                $("#select2").hide(0);
+                $("#select3").hide(0);
+                $("#com_hand").text("バイキルトのまほうをとなえた");
+                $("#judgment").text("こうげきりょくが２ばいになった！");
+                $("#next").show(0);
+            });
+            $("#play").on("click", function () {
+                $("#select1").hide(0);
+                $("#select2").hide(0);
+                $("#select3").hide(0);
+                $("#com_hand").text("あそんでみた…");
+                $("#judgment").text("…てきはようすをうかがっている");
+                $("#next").show(0);
+            })
+            $("#escape").on("click", function () {
+                $("#select1").hide(0);
+                $("#select2").hide(0);
+                $("#select3").hide(0);
+                $("#com_hand").text("にげようとした…");
+                $("#judgment").text("…にげちゃだめだ！");
+                $("#next").show(0);
+            })
+            $("#return").on("click", function () {
+                $("#select1").show(0);
+            })
+
+
+            $("#gu_btn").on("click", function () {
+                //グーをクリック
+                let result = ["グー", "チョキ", "パー"];
+                let val = Math.floor(Math.random() * 3);
+                let edamage = Math.floor(Math.random() * 20 + 40);
+                let damage = Math.floor(Math.random() * 20 * z + 10 * z);
+                $("#com_hand").text("");
+                $("#judgment").text("");
+                $("#select2").hide(0);
+                $("#com_hand").text("コンピュータのては…" + result[val]);
+                //0はグー、1はチョキ、2はパー
+
+                if (val == 0) {
+                    damage2 = (damage % 5 + 2) * z;
+                    ehp = ehp - damage2;
+                    setTimeout(function () {
+                        $("#judgment").text("あいこ！…あなたのこうげきはぼうぎょされた" + " " + damage2 + "のダメージ！");
+                        // $("#ehp").text("H" + " " + ehp);
+                        $("#next").show(0);
+                        $('img').flicker({
+                            'reps': 3,
+                            'pause': 100,
+                            'delay': 200,
+                            'color': '#FFF',
+                        });
+                    }, 500)
+
+                } else if (val == 1) {
+                    ehp = ehp - damage;
+                    setTimeout(function () {
+                        if (damage >= 100) {
+                            $("#judgment").text("かち！…あなたはこうげきをした" + " " + "かいしんのいちげき！" + " " + damage + "のダメージ！");
+                        } else {
+                            $("#judgment").text("かち！…あなたはこうげきをした" + " " + damage + "のダメージ！");
+                        }
+                        $("#next").show(0);
+                        $('img').flicker({
+                            'reps': 3,
+                            'pause': 100,
+                            'delay': 200,
+                            'color': '#FFF',
+                        });
+                    }, 500)
+                } else if (val == 2) {
+                    damage3 = edamage;
+                    hp = hp - damage3;
+                    setTimeout(function () {
+                        $("#judgment").text("まけ！…こうげきをかわされ、はんげきをうけてしまった" + " " + damage3 + "のダメージ！");
+                        $("#next").show(0);
+
+                        if (hp <= 0) {
+                            $("#hp").text("H" + " " + 0);
+                            $("#name").css("color", "rgb(160,9,9)");
+                            $("#name ul").css("border-color", "red");
+                        } else if (hp <= 10) {
+                            $("#name").css("color", "yellow");
+                            $("#hp").text("H" + " " + hp);
+                        }
+                        else {
+                            $("#hp").text("H" + " " + hp);
+                        }
+                    }, 500)
+                }
+
+            });
+            $("#cho_btn").on("click", function () {
+                let result = ["チョキ", "パー", "グー"];
+                let val = Math.floor(Math.random() * 3);
+                let edamage = Math.floor(Math.random() * 20 + 40);
+                let damage = Math.floor(Math.random() * 20 * z + 10 * z);
+                $("#com_hand").text("");
+                $("#judgment").text("");
+                $("#select2").hide(0);
+                $("#com_hand").text("コンピュータのては…" + result[val]);
+                //0はグー、1はチョキ、2はパー
+
+                if (val == 0) {
+                    damage2 = (damage % 5 + 2) * z;
+                    ehp = ehp - damage2;
+                    setTimeout(function () {
+                        $("#judgment").text("あいこ！…あなたのこうげきはぼうぎょされた" + " " + damage2 + "のダメージ！");
+                        // $("#ehp").text("H" + " " + ehp);
+                        $("#next").show(0);
+                    }, 500)
+
+                } else if (val == 1) {
+                    ehp = ehp - damage;
+                    setTimeout(function () {
+                        if (damage >= 100) {
+                            $("#judgment").text("かち！…あなたはこうげきをした" + " " + "かいしんのいちげき！" + " " + damage + "のダメージ！");
+                        } else {
+                            $("#judgment").text("かち！…あなたはこうげきをした" + " " + damage + "のダメージ！");
+                        }
+                        $("#next").show(0);
+                    }, 500)
+                } else if (val == 2) {
+                    damage3 = edamage;
+                    hp = hp - damage3;
+                    setTimeout(function () {
+                        $("#judgment").text("まけ！…こうげきをかわされ、はんげきをうけてしまった" + " " + damage3 + "のダメージ！");
+                        $("#next").show(0);
+                    }, 500)
+                    if (hp <= 0) {
+                        $("#hp").text("H" + " " + 0);
+                        $("#name").css("color", "rgb(160,9,9)");
+                        $("#name ul").css("border-color", "red");
+                    } else if (hp <= 10) {
+                        $("#name").css("color", "yellow");
+                        $("#hp").text("H" + " " + hp);
+                    }
+                    else {
+                        $("#hp").text("H" + " " + hp);
+                    }
+                }
+
+            });
+            $("#par_btn").on("click", function () {
+                //パーをクリック
+                let result = ["パー", "グー", "チョキ"];
+                let val = Math.floor(Math.random() * 3);
+                let edamage = Math.floor(Math.random() * 20 + 40);
+                let damage = Math.floor(Math.random() * 20 * z + 10 * z);
+                $("#com_hand").text("");
+                $("#judgment").text("");
+                $("#select2").hide(0);
+                $("#com_hand").text("コンピュータのては…" + result[val]);
+                //0はグー、1はチョキ、2はパー
+
+                if (val == 0) {
+                    damage2 = (damage % 5 + 2) * z;
+                    ehp = ehp - damage2;
+                    setTimeout(function () {
+                        $("#judgment").text("あいこ！…あなたのこうげきはぼうぎょされた" + " " + damage2 + "のダメージ！");
+                        // $("#ehp").text("H" + " " + ehp);
+                        $("#next").show(0);
+                    }, 500)
+
+                } else if (val == 1) {
+                    ehp = ehp - damage;
+                    setTimeout(function () {
+                        if (damage >= 100) {
+                            $("#judgment").text("かち！…あなたはこうげきをした" + " " + "かいしんのいちげき！" + " " + damage + "のダメージ！");
+                        } else {
+                            $("#judgment").text("かち！…あなたはこうげきをした" + " " + damage + "のダメージ！");
+                        }
+                        $("#next").show(0);
+                    }, 500)
+                } else if (val == 2) {
+                    damage3 = edamage;
+                    hp = hp - damage3;
+                    setTimeout(function () {
+                        $("#judgment").text("まけ！…こうげきをかわされ、はんげきをうけてしまった" + " " + damage3 + "のダメージ！");
+                        $("#next").show(0);
+                    }, 500)
+                    if (hp <= 0) {
+                        $("#hp").text("H" + " " + 0);
+                        $("#name").css("color", "rgb(160,9,9)");
+                        $("#name ul").css("border-color", "red");
+                    } else if (hp <= 10) {
+                        $("#name").css("color", "yellow");
+                        $("#hp").text("H" + " " + hp);
+                    }
+                    else {
+                        $("#hp").text("H" + " " + hp);
+                    }
+                }
+
+            });
+
+            //ここに処理を追加
+        });
+
+    </script>
+
+</body>
+
+</html>

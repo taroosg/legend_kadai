@@ -1,0 +1,173 @@
+/* 全体に対する処理 */
+html,body{
+	font-family: Roboto, "Yu Gothic Medium", "游ゴシック Medium", YuGothic, "游ゴシック体", "ヒラギノ角ゴ Pro W3", "メイリオ", sans-serif;
+	line-height: 1.75; /* 行の高さ指定 */
+	font-size: 16px;
+	width: 100%;
+	margin-right: auto; 
+	margin-left : auto;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.8);
+}
+
+/*　パディングをサイズ内側にする処理　-webkit等はベンダープレフィックス*/
+* {
+	padding:0;
+	margin:0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+/* headerに対する処理 */
+header{
+	height: 10%;
+	text-align: center;
+	color: grey;
+}
+
+.header_box{
+	z-index: -1;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background-image: url(./jpg/zawa.gif);	
+	opacity: 0.6;
+}
+
+/* mainに対する処理 */
+main{
+	height: 83%;
+}
+
+/* footerに対する処理 */
+footer{
+	height: 7%;
+}
+
+/* カードに対する処理 */
+.card{
+	height: 70%;
+	margin: 0 50px 0 50px;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+}
+
+ul{
+    list-style: none;
+    display: -webkit-flex;
+	justify-content: center;
+}
+
+li{
+	width: 120px;
+	height: 170px;
+    margin: 15px;
+    background: gray;
+	text-align: center;
+	cursor: pointer;
+	border-radius: 10px;
+}
+
+img{
+	width: 100%;
+	height: 100%;
+	border: 5px solid darkgrey;
+	border-radius: 10px;
+	object-fit: cover;
+	overflow: hidden;
+	
+}
+
+.com_hand,.judgment{
+	text-align: center;
+	color: gray;
+}
+
+/* モーダルに対する処理 */
+.modalArea {
+	display: none;
+	position: fixed;
+	z-index: 10; 
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.modalBg {
+	width: 100%;
+	height: 100%;
+	background-color: rgba(30,30,30,0.9);
+}
+
+.modalWrapper {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform:translate(-50%,-50%);
+	width: 70%;
+	max-width: 500px;
+	padding: 10px 30px;
+	background-color: #fff;
+}
+
+.modalWrapper0 {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform:translate(-50%,-50%);
+	width: 90%;
+	max-width: 900px;
+	height: 80%;
+	max-height: 700px;
+	padding: 200px 40px 0 40px;
+	background-color: #fff;
+	font-size: 24px;
+}
+
+.closeModal {
+	position: absolute;
+	top: 0.5rem;
+	right: 1rem;
+	cursor: pointer;
+}
+
+/* 以下ボタンスタイル */
+button {
+	padding: 10px;
+	margin: 10px 20px;
+	background-color: #fff;
+	border: 1px solid #282828;
+	border-radius: 2px;
+	cursor: pointer;
+}
+
+.kakin_box{
+	width: 100%;
+	height: auto;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+/* 残金に対する処理 */
+.yen_box{
+	font-size: 50px;
+	color:grey;
+	text-align: center;
+}
+
+/* もう一回に対する処理 */
+.onecemore{
+	width: 80px;
+	height: 50px;
+	border-radius: 20%;
+	float: right;
+	text-align:center;
+	line-height: 50px;
+	background:grey
+}

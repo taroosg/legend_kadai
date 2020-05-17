@@ -1,0 +1,373 @@
+
+/* ---------- 全体共通 ---------- */
+body{
+	font-family: Roboto, "Yu Gothic Medium", "游ゴシック Medium", YuGothic, "游ゴシック体", "ヒラギノ角ゴ Pro W3", "メイリオ", sans-serif;
+	line-height: 1.75;
+	font-size: 16px;
+}
+
+/* パディングをサイズ内側にする処理 */
+* {
+	padding:0;
+	margin:0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+
+/* ---------- 使えるCSS ---------- */
+/* border-radius: 3px; */
+/* letter-spacing: 0.5em; */
+/* overflow: hidden; この枠(div)の外にはみ出たら非表示のCSS - positionと使う */
+
+/* position:relative; positionの親要素 */
+/* position:absolute; positionの子要素 */
+/* left:120px; absoluteの位置指定 */
+/* top:80px;   absoluteの位置指定 */
+
+.flex_row{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.flex_column{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.bg_cover{
+    background-position: center;
+    background-size: cover;
+	background-repeat: no-repeat;
+}
+
+/* --------------------------------------- */
+/* #main_wrap                              */
+/* --------------------------------------- */
+
+#main_wrap{
+	background: rgb(224, 224, 224);
+	min-height: 630px;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+
+	position:relative; 
+}
+
+/* --------------------------------------- */
+/* #controller                             */
+/* --------------------------------------- */
+#controller{
+	background: rgb(245, 245, 245);
+	width: 120px;
+	min-height: 400px;
+
+	padding: 10px 0;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center;
+	flex-wrap: wrap;
+
+	position:fixed;
+	left:20px;
+	top:20px;
+}
+
+.cnt{
+	background: rgb(201, 201, 201);
+	width: 100px;
+	height: 20px;
+
+	margin: 5px auto;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+
+	background-position: center;
+    background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.cnt_top{
+	background-image: url("../img/cnt_top.png");
+}
+.cnt_navi{
+	background-image: url("../img/cnt_navi.png");
+}
+.cnt_text{
+	background-image: url("../img/cnt_text.png");
+}
+.cnt_photo{
+	background-image: url("../img/cnt_photo.png");
+}
+.cnt_course{
+	background-image: url("../img/cnt_course.png");
+}
+.cnt_news{
+	background-image: url("../img/cnt_news.png");
+}
+.cnt_map{
+	background-image: url("../img/cnt_map.png");
+}
+.cnt_info{
+	background-image: url("../img/cnt_info.png");
+}
+.cnt_form{
+	background-image: url("../img/cnt_form.png");
+}
+.cnt_footer{
+	background-image: url("../img/cnt_footer.png");
+}
+
+/* --------------------------------------- */
+/* #menu_button                            */
+/* --------------------------------------- */
+#menu_button{
+	min-width: 120px;
+	padding: 0.4em 0;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	position:fixed;
+	left:20px;
+	top:420px;
+}
+
+#menu_button a {
+	background: rgb(245, 245, 245);
+	font-size: 0.5em;
+	letter-spacing: 0.2em;
+	color: #555555;
+
+	text-align: center;
+	display: block;
+
+	transition: .2s;
+	}
+
+#menu_button a:hover {
+	background: rgb(201, 201, 201);;
+	color: #ffffff;
+}
+
+/* 共通 */
+.sr_button{
+	width:100%;
+	margin: 0.2em 0;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: left;
+	align-items: center;
+	/* flex-wrap: wrap; */
+}
+
+.sr_label{
+	min-width:120px;
+}
+
+.sr_wrap ul{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.sr_wrap li{
+	min-width:80px;
+}
+
+/* 開閉用 */
+.sr_wrap_hide{
+	display: none;
+}
+
+
+
+/* --------------------------------------- */
+/* #trash_can                              */
+/* --------------------------------------- */
+#trash_can{
+	background-image: url("../img/trash_can.png");
+	background-position: center;
+    background-size: cover;
+	background-repeat: no-repeat;
+
+	width: 120px;
+	max-width: 120px;
+	min-height: 120px;
+	max-height: 120px;
+
+	position:fixed;
+	left:20px;
+	top:490px;
+
+	overflow: hidden;
+}
+
+/* --------------------------------------- */
+/* #code_display                              */
+/* --------------------------------------- */
+
+#code_display{
+	background: rgb(140, 153, 224);
+	/* vhは画面サイズの高さ！ */
+	height: 100vh;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+
+	position:fixed;
+	right: -400px;
+	top: 0px;
+}
+
+#code_display_button{
+	background: rgb(190, 190, 190);
+	width: 20px;
+	height: 100%;
+}
+
+#code_wrap{
+	width: 400px;
+	height: 100%;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#code_html{
+	background: rgb(126, 126, 126);
+	width: 100%;
+	height: 50%;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#code_css{
+	background: rgb(75, 75, 75);
+	width: 100%;
+	height: 50%;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.code_area{
+	background: #ffffff;
+	width: 90%;
+	height: 80%;
+
+	margin-top: 2%;
+	padding: 0.5em;
+	
+	font-size: 0.5em;
+	color: #333;
+
+	resize: none;
+	outline: none;
+    border: none;
+	border-radius: 5px;
+}
+
+.dl_rabel{
+	width: 90%;
+	text-align: right;
+}
+
+.dl_rabel a{
+	font-size: 0.5em;
+	color: #ffffff;
+	letter-spacing: 0.2em;
+}
+
+/* --------------------------------------- */
+/* #main_display                           */
+/* --------------------------------------- */
+#main_display{
+	background: rgb(190, 190, 190);
+	margin: 20px auto;
+	width: 600px;
+	min-height: 20px;
+}
+
+.div_sortable_wrap{
+	background: rgb(240, 240, 240);
+
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.div_sortable{
+	background: rgb(208, 216, 223);
+
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+.drag-handle{
+	background: rgb(240, 240, 240);
+	min-height: 20px;
+	width: 20px;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+
+
+/* --------------------------------------- */
+/* 追加アイテム初期パラメーター（追加時の動作３） */
+/* --------------------------------------- */
+
+/* ここのパラーメータをすべてjs側に記述する */
+/* jsからHTMLの<script>タグ内に反映される */
+
+
+
+
+/* --------------------------------------- */
+/* #footer                                 */
+/* --------------------------------------- */
+#footer{
+	margin-top: 1em;
+	padding-bottom: 1em;
+	text-align: center;
+}
+
+#footer p{
+	font-size: 0.5em;
+	letter-spacing: 0.5em;
+	color: #555555;
+}

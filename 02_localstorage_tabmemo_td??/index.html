@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>My MemoPad</title>
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link rel="stylesheet" href="css/sample.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/earlyaccess/kokoro.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Gudea|Russo+One" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <h1 class="title">My MemoPad</h1>
+    <button id="resetPs">Reset Position</button>
+    <button id="resetColor">Reset Color</button>
+    <button id="resetAll">Reset All</button>
+  </header>
+  <main></main>
+
+  <script>
+    for (let i = 1; i < 9; i++) {
+      $("main").append('<div id="c' + i + '" class="card"></div>');
+      $("#c" + i).append('<div><textarea id="memo' + i + '" cols="30" rows="10"></textarea></div>');
+      $("#c" + i).append('<div class="buttons no' + i + '"></div>');
+      $(".no" + i).append('<button class="clear' + i + '">Clear</button><button class="color' + i + '">Change Color</button>');
+      $(".card").resizable();
+    }
+
+    var positiont
+    var positionl
+    let textValue
+    let zindex
+    let bgColor
+    var z = 1;
+
+    let notes = []
+    let noteData
+    function updateNote() {
+      noteData = {
+        // text: textValue,
+        // color: bgColor,
+        top: positiont,
+        left: positionl,
+        zindex: zindex
+      };
+    };
+
+    function saveData(i) {
+      var noteJson = JSON.stringify(noteData);
+      localStorage.setItem("data" + i, noteJson);
+    }
+
+    function updateData(i) {
+      positiont = $("#c" + i).offset().top;
+      positionl = $("#c" + i).offset().left;
+      textValue = $("#memo" + i).val();
+      zindex = $("#c" + i).css('z-index');
+      bgColor = $("#c" + i).css("background-color");
+    }
+
+    for (let i = 1; i < 9; i++) {
+      const noteSaved = JSON.parse(localStorage["data" + i] || '[]');
+      notes.push(noteSaved);
+    }
+
+    $(".card").draggable({
+      containment: 'body',
+      scroll: false,
+      drag: function (e, ui) {
+        for (let i = 1; i < 9; i++) {
+          $(this).css('z-index', z++);
+          zindex = $("#c" + i).css('z-index');
+
+          updateData(i);
+          updateNote();
+          saveData(i);
+        }
+      }
+    })
+
+
+    // 入力、インデックス処理
+    for (let i = 1; i < 9; i++) {
+      $("#memo" + i).on("input", function () {
+        textValue = $(this).val();
+        localStorage.setItem("text" + i, textValue);
+        updateData(i);
+        updateNote();
+        saveData(i);
+      })
+
+      $("#c" + i).on('click', function () {
+        $(this).css('z-index', z++);
+        zindex = $("#c" + i).css('z-index');
+        updateData(i);
+        updateNote();
+        saveData(i);
+      })
+    }
+
+    // クリア処理
+    for (let i = 1; i < 9; i++) {
+      $(".clear" + i).on("click", function () {
+        $("#memo" + i).val("");
+        // textValue = "";
+        localStorage.removeItem("text" + i);
+        updateNote();
+        saveData(i);
+      })
+    }
+
+    // 色変更の処理
+    let p = 0;
+    let bgcolor = ["orange", "red", "lightblue", "lightgreen", "white", "pink", "yellow", "lightgrey"];
+
+    for (let i = 1; i < 9; i++) {
+      $(".color" + i).on("click", function () {
+        $(this).each(function () {
+          $("#c" + i).css('background-color', bgcolor[p]);
+          bgColor = $("#c" + i).css("background-color");
+          localStorage.setItem("color" + i, bgColor);
+          updateData(i);
+          updateNote();
+          saveData(i);
+          p++;
+          if (p > 7) {
+            p = 0;
+          }
+        });
+      })
+    }
+
+    // //ロード時に表示
+    for (let i = 1; i < 9; i++) {
+      var textData = localStorage.getItem("text" + i);
+      $("#memo" + i).val(textData);
+    }
+
+    for (let i = 1; i < 9; i++) {
+      let colorData = localStorage.getItem("color" + i);
+      $("#c" + i).css({
+        'background-color': colorData,
+        'z-index': notes[i - 1].zindex
+      });
+    }
+
+    for (let i = 1; i < 9; i++) {
+      $("#c" + i).offset({
+        top: notes[i - 1].top,
+        left: notes[i - 1].left
+      });
+    }
+
+
+    // 元の場所に戻す
+    $('#resetPs').on('click', function () {
+      for (let i = 1; i < 9; i++) {
+        localStorage.removeItem("data" + i);
+      };
+      location.reload();
+    });
+
+
+    // 色だけリセット
+    $('#resetColor').on('click', function () {
+      for (let i = 1; i < 9; i++) {
+        localStorage.removeItem("color" + i);
+      };
+      location.reload();
+    });
+
+
+    // 全てリセット
+    $('#resetAll').on('click', function () {
+      if (confirm("本当に全てリセットしますか？")) {
+        for (let i = 1; i < 9; i++) {
+          localStorage.removeItem("data" + i)
+          localStorage.removeItem("color" + i);
+          localStorage.removeItem("text" + i);
+        };
+        location.reload();
+      }
+    });
+
+    var windowWidth = $(window).width();
+
+    // レスポンシブル処理
+    if (windowWidth < 325) {
+      for (let i = 1; i < 9; i++) {
+        localStorage.removeItem("data" + i);
+      };
+
+    };
+
+  </script>
+</body>
+
+</html>

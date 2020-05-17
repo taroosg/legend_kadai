@@ -12,7 +12,7 @@
 
 ## localstorage
 
-- [タブで保存できるメモ帳](https://taroosg.github.io/legend_kadai/02_localstorage_tabmemo_td??/)
+- [タブで保存できるメモ帳](https://taroosg.github.io/legend_kadai/02_localstorage_tabmemo_td__/)
 
 - [動かせる付箋](https://taroosg.github.io/legend_kadai/02_localstorage_fusen_fd01kano/)
 

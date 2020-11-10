@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>なんちゃらモンスター育成編</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div id="opening">
+        <h1>なんちゃらモンスター</h1>
+        <h2>そだてろ！なんモン！</h2>
+        <div id="opening_btnbox">
+            <div id="start_btn" class="opening_btn">はじめから</div>
+            <div id="restart_btn" class="opening_btn">つづきから</div>
+            <div id="dataclear_btn" class="opening_btn">データ消去</div>
+        </div>
+    </div>
+
+    <div id="dataclear_scene">
+        <div id="dataclear_dialog"></div>
+        <div id="dataclear_yes1" class="dataclear_btns">はい</div>
+        <div id="dataclear_yes2" class="dataclear_btns">はい</div>
+        <div id="dataclear_no" class="dataclear_btns">いいえ</div>
+        <div id="dataclear_totitle" class="dataclear_btns">タイトルへ</div>
+    </div>
+
+    <div id="loading">
+        <p>ロード中だお（∪＾ω＾）</p>
+    </div>
+
+    <div id="main_scene">
+        <div id="main_box">
+            <div id="farm_scene" class="main_scenes">
+                <div id="player_monster">
+                    <div id="icon_area">
+                        <div id="meal_icon" class="icons">食 欲</div>
+                        <div id="toilet_icon" class="icons">便 意</div>
+                        <div id="sleep_icon" class="icons">眠 気</div>
+                    </div>
+                    <div id="pm_img"></div>
+                </div>
+                <div id="text_dialog">
+                    <div id="text_dialogbox"></div>
+                    <div id="dialog_yn">
+                        <div id="dialog_close" class="yn_boxes">
+                            <div id="close">とじる</div>
+                        </div>
+                        <div id="sleep_close" class="yn_boxes">
+                            <div id="sleep_close_btn">とじる</div>
+                        </div>
+                        <div id="life_next" class="yn_boxes">
+                            <div id="life_next_btn">すすむ</div>
+                        </div>
+                        <div id="life_close" class="yn_boxes">
+                            <div id="life_close_btn">とじる</div>
+                        </div>
+                        <div id="training_yn" class="yn_boxes">
+                            <div id="training_yes" class="dialog_command">はい</div>
+                            <div id="training_no" class="dialog_command dialog_no">いいえ</div>
+                        </div>
+                        <div id="meal_yn" class="yn_boxes">
+                            <div id="meal_yes" class="dialog_command">はい</div>
+                            <div id="meal_no" class="dialog_command dialog_no">いいえ</div>
+                        </div>
+                        <div id="sleep_yn" class="yn_boxes">
+                            <div id="sleep_yes" class="dialog_command">はい</div>
+                            <div id="sleep_no" class="dialog_command dialog_no">いいえ</div>
+                        </div>
+                        <div id="toilet_yn" class="yn_boxes">
+                            <div id="toilet_yes" class="dialog_command">はい</div>
+                            <div id="toilet_no" class="dialog_command dialog_no">いいえ</div>
+                        </div>
+                        <div id="save_yn1" class="yn_boxes">
+                            <div id="save_yes1" class="dialog_command">はい</div>
+                            <div id="save_no1" class="dialog_command dialog_no">いいえ</div>
+                        </div>
+                        <div id="save_yn2" class="yn_boxes">
+                            <div id="save_yes2" class="dialog_command">はい</div>
+                            <div id="save_no2" class="dialog_command dialog_no">いいえ</div>
+                        </div>
+                        <div id="dialog_to_title" class="yn_boxes">
+                            <div id="to_title">タイトルへ</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="status_scene" class="main_scenes">
+                <div id="status_left">
+                    <div id="status_img_box">
+                        <div id="status_img"></div>
+                    </div>
+                    <div id="status_name"></div>
+                </div>
+                <div id="status_right">
+                    <div id="status_hp" class="status_list"></div>
+                    <div id="status_attack" class="status_list"></div>
+                    <div id="status_defense" class="status_list"></div>
+                    <div id="status_speed" class="status_list"></div>
+                </div>
+            </div>
+            <div id="battle_scene" class="main_scenes">battle scene</div>
+            <div id="training_scene" class="main_scenes"></div>
+            <div id="meal_scene" class="main_scenes">meal scene</div>
+            <div id="sleep_scene" class="main_scenes">sleep scene</div>
+            <div id="toilet_scene" class="main_scenes">toilet scene</div>
+            <div id="save_scene" class="main_scenes">save scene</div>
+        </div>
+
+        <div id="command_box">
+            <div id="main_commandbox" class="command_boxes">
+                <div id="farm_command" class="command">ふぁーむ</div>
+                <div id="status_command" class="command">すてたす</div>
+                <div id="battle_command" class="command">たたかう</div>
+                <div id="training_command" class="command">いくせい</div>
+                <div id="meal_command" class="command">しょくじ</div>
+                <div id="sleep_command" class="command">すいみん</div>
+                <div id="toilet_command" class="command">おといれ</div>
+                <div id="background_command" class="command">はいけい</div>
+                <div id="save_command" class="command">きろく</div>
+            </div>
+            <div id="status_commandbox" class="command_boxes">
+                <div id="status_return" class="command status_commands return_commands">もどる</div>
+            </div>
+
+            <div id="training_commandbox" class="command_boxes">
+                <div id="training_commands0" class="command training_commands">たいりょく</div>
+                <div id="training_commands1" class="command training_commands">こうげき</div>
+                <div id="training_commands2" class="command training_commands">ぼうぎょ</div>
+                <div id="training_commands3" class="command training_commands">すばやさ</div>
+                <div id="training_return" class="command training_commands return_commands">もどる</div>
+            </div>
+            <div id="meal_commandbox" class="command_boxes">
+                <div id="meal_commands0" class="command meal_commands">にく</div>
+                <div id="meal_commands1" class="command meal_commands">さかな</div>
+                <div id="meal_commands2" class="command meal_commands">やさい</div>
+                <div id="meal_return" class="command meal_commands return_commands">もどる</div>
+            </div>
+            <div id="background_commandbox" class="command_boxes">
+                <div id="background_commands0" class="command background_commands">なし</div>
+                <div id="background_commands1" class="command background_commands">うみ</div>
+                <div id="background_commands2" class="command background_commands">やま</div>
+                <div id="background_commands3" class="command background_commands">もり</div>
+                <div id="background_commands4" class="command background_commands">そうげん</div>
+                <div id="background_commands5" class="command background_commands">ゆきやま</div>
+                <div id="background_commands6" class="command background_commands">？？？？</div>
+                <div id="background_return" class="command background_commands return_commands">もどる</div>
+            </div>
+            <div id="save_commandbox" class="command_boxes">
+                <div id="save_commands0" class="command save_commands">せーぶ</div>
+                <div id="save_commands1" class="command save_commands">ろーど</div>
+                <div id="save_commands2" class="command save_commands">たいとる</div>
+                <div id="save_return" class="command save_commands return_commands">もどる</div>
+            </div>
+        </div>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        </script>
+        <script type="text/javascript" src="js/system.js"></script>
+</body>
+
+</html>

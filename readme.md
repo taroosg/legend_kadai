@@ -17,3 +17,5 @@
 - [動かせる付箋](https://taroosg.github.io/legend_kadai/02_localstorage_fusen_fd01kano/)
 
 - [チートアカデミー](https://taroosg.github.io/legend_kadai/02_localstorage_cheat_fd01hasegawa/)
+
+- [なんちゃらモンスター](https://taroosg.github.io/legend_kadai/02_localstorage_monster_fd06_kobari/)

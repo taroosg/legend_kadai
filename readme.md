@@ -10,6 +10,8 @@
 
 - [キャプテン翼っぽいじゃんけん](https://taroosg.github.io/legend_kadai/01_janken_tsubasa_fl01_tommy)
 
+- [リゼロ](https://github.com/micckey34/04_06_Janken)
+
 ## localstorage
 
 - [タブで保存できるメモ帳](https://taroosg.github.io/legend_kadai/02_localstorage_tabmemo_td__/)

@@ -10,7 +10,9 @@
 
 - [キャプテン翼っぽいじゃんけん](https://taroosg.github.io/legend_kadai/01_janken_tsubasa_fl01_tommy)
 
-- [リゼロ](https://github.com/micckey34/04_06_Janken)
+- [リゼロ](https://micckey34.github.io/04_06_Janken/Re-zero/game.html)
+
+- [リゼロ Gitub](https://github.com/micckey34/04_06_Janken)
 
 ## localstorage
 
